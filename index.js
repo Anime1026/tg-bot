@@ -11,14 +11,14 @@ const searchCollection_collectionId = (bot, msg) => {
     headers: { accept: "*/*", "x-api-key": "demo-api-key" },
   };
 
-  console.log(msg.update.message.text, "msg");
+  const id = msg.update.message.text;
 
-  //   fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       console.log(console.log(response.data));
-  //     })
-  //     .catch((err) => console.error(err));
+  fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response.data, "response.data");
+    })
+    .catch((err) => console.error(err));
 };
 
 bot.start((ctx) => {
