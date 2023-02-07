@@ -40,7 +40,7 @@ bot.command("eth", async (ctx) => {
 bot.command("ethId", async (ctx) => {
   try {
     ctx.reply("Please Input the CollectionName");
-    bot.on("callback_query", (msg) => {
+    bot.on("message", (msg) => {
       searchCollection_collectionId(bot, msg);
     });
   } catch (error) {
