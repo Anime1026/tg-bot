@@ -6,16 +6,25 @@ require("dotenv").config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) => {
-  let message = `Please use the /nft command to receive a new nft`;
+  let message = `Please use the /eth or /sol command to receive a new nft`;
   ctx.reply(message);
 });
 
-bot.command("nft", async (ctx) => {
+bot.command("eth", async (ctx) => {
   try {
-    ctx.reply("Select the Network");
+    ctx.reply("Please Input the CollectionName or Contract Address");
   } catch (error) {
     console.log("error", error);
-    ctx.reply("error sending image");
+    ctx.reply("Sorry, please again");
+  }
+});
+
+bot.command("sol", async (ctx) => {
+  try {
+    ctx.reply("Please Input the Solana Contract Address");
+  } catch (error) {
+    console.log("error", error);
+    ctx.reply("Sorry, please again");
   }
 });
 
