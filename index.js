@@ -11,7 +11,7 @@ const searchCollection_collectionId = (bot, msg) => {
     headers: { accept: "*/*", "x-api-key": "demo-api-key" },
   };
 
-  console.log(msg.text, "msg");
+  console.log(msg, "msg");
 
   //   fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
   //     .then((response) => response.json())
