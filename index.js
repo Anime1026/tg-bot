@@ -11,7 +11,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const searchCollection_collectionId = async (bot, msg) => {
   const options = {
     method: "GET",
-    headers: { accept: "*/*", "x-api-key": "demo-api-key" },
+    headers: { accept: "*/*", "x-api-key": "abb98582ec0343268a2fd47cfdf46036" },
   };
 
   const id = msg.update.message.text;
