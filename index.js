@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import { Telegraf } from "telegraf";
 import { v4 as uuidV4 } from "uuid";
 
@@ -18,12 +18,10 @@ const searchCollection_collectionId = async (bot, msg) => {
 
   console.log(id, "id");
 
-  await fetch(
-    `https://api.reservoir.tools/collections/v5?id=0x8d04a8c79ceb0889bdd12acdf3fa9d207ed3ff63`,
-    options
-  )
+  axios
+    .request(options)
     .then((response) => {
-      console.log(response, "response.data");
+      res.send(response.data);
     })
     .catch((err) => console.error(err));
 };
