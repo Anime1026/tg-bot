@@ -1,0 +1,22 @@
+{
+  "name": "nftfvbot",
+  "version": "1.0.0",
+  "description": "nft floorPrice and Volume track bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "jimp": "^0.22.4",
+    "pexels": "^1.4.0",
+    "telegraf": "^4.11.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
