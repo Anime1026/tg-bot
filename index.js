@@ -8,7 +8,7 @@ dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const searchCollection_collectionId = (bot, msg) => {
+const searchCollection_collectionId = async (bot, msg) => {
   const options = {
     method: "GET",
     headers: { accept: "*/*", "x-api-key": "demo-api-key" },
@@ -18,9 +18,12 @@ const searchCollection_collectionId = (bot, msg) => {
 
   console.log(id, "id");
 
-  fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
+  await fetch(
+    `https://api.reservoir.tools/collections/v5?id=0x8d04a8c79ceb0889bdd12acdf3fa9d207ed3ff63`,
+    options
+  )
     .then((response) => {
-      console.log(response.data, "response.data");
+      console.log(response, "response.data");
     })
     .catch((err) => console.error(err));
 };
