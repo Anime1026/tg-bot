@@ -5,16 +5,20 @@ require("dotenv").config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const searchCollection_collectionId = (id) => {
+const searchCollection_collectionId = (bot, msg) => {
   const options = {
     method: "GET",
     headers: { accept: "*/*", "x-api-key": "demo-api-key" },
   };
 
-  fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
+  console.log(msg, "msg");
+
+  //   fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log(console.log(response.data));
+  //     })
+  //     .catch((err) => console.error(err));
 };
 
 bot.start((ctx) => {
@@ -36,8 +40,8 @@ bot.command("eth", async (ctx) => {
 bot.command("ethId", async (ctx) => {
   try {
     ctx.reply("Please Input the CollectionName");
-    bot.on(text, async (ctx) => {
-      console.log(text, "text");
+    bot.on("callback_query", (msg) => {
+      searchCollection_collectionId(bot, msg);
     });
   } catch (error) {
     console.log("error", error);
