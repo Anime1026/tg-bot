@@ -16,8 +16,9 @@ const searchCollection_collectionId = (bot, msg) => {
 
   const id = msg.update.message.text;
 
+  console.log(id, "id");
+
   fetch(`https://api.reservoir.tools/collections/v5?id=${id}`, options)
-    .then((response) => response.json())
     .then((response) => {
       console.log(response.data, "response.data");
     })
