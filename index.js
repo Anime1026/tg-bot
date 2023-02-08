@@ -95,14 +95,10 @@ const searchCollection_collectionName = async (msg) => {
 };
 
 const searchCollection_solCollectionName = async (msg) => {
-  const options = {
-    method: "GET",
-    url: `https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=${msg}`,
-    headers: { accept: "*/*" },
-  };
-
   axios
-    .request(options)
+    .get(
+      "https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=degods"
+    )
     .then((response) => {
       console.log(response.data, "response==================");
     })
