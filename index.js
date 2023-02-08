@@ -6,7 +6,18 @@ import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-
 dotenv.config();
 // let factGenerator = require("./factGenerator");
 
+let cash = "";
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
+const InputCallBack = async (ctx, msg) => {
+  console.log(msg, "msg getting-0000000000000000000");
+  if (cash === "ethId") {
+    searchCollection_collectionId(ctx, msg);
+  } else if (cash === "ethName") {
+    searchCollection_collectionName(ctx, msg);
+  }
+};
 
 const searchCollection_collectionId = async (ctx, msg) => {
   const id = msg.update.message.text;
@@ -118,10 +129,11 @@ bot.command("eth", async (ctx) => {
 bot.command("ethId", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection ID");
-    bot.on("message", (msg) => {
-      searchCollection_collectionId(ctx, msg);
-      return;
-    });
+    cash = "ethId";
+    // bot.on("message", (msg) => {
+    //   searchCollection_collectionId(ctx, msg);
+    //   return;
+    // });
   } catch (error) {
     console.log("error", error);
     ctx.reply("Sorry, please again");
@@ -131,10 +143,11 @@ bot.command("ethId", async (ctx) => {
 bot.command("ethName", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection Name");
-    bot.on("message", (msg) => {
-      searchCollection_collectionName(ctx, msg);
-      return;
-    });
+    cash = "ethName";
+    // bot.on("message", (msg) => {
+    //   searchCollection_collectionName(ctx, msg);
+    //   return;
+    // });
   } catch (error) {
     console.log("error", error);
     ctx.reply("Sorry, please again");
@@ -148,6 +161,10 @@ bot.command("sol", async (ctx) => {
     console.log("error", error);
     ctx.reply("Sorry, please again");
   }
+});
+
+bot.onText(RegExp(""), async (ctx, msg) => {
+  InputCallBack(ctx, msg);
 });
 
 bot.launch();
