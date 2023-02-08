@@ -7,20 +7,19 @@ dotenv.config();
 // let factGenerator = require("./factGenerator");
 
 let cash = "";
+let ctx;
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const InputCallBack = (msg) => {
-  console.log(msg, "msg getting-0000000000000000000");
   if (cash === "ethId") {
-    // searchCollection_collectionId(ctx, msg);
+    searchCollection_collectionId(ctx, msg);
   } else if (cash === "ethName") {
-    // searchCollection_collectionName(ctx, msg);
+    searchCollection_collectionName(ctx, msg);
   }
 };
 
 const searchCollection_collectionId = async (ctx, msg) => {
-  console.log(msg, "msg------------------------");
   const id = msg.update.message.text;
   const options = {
     method: "GET",
@@ -107,6 +106,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
 // testFunc();
 
 bot.start((ctx) => {
+  ctx = ctx;
   let message = `Please use the /eth or /sol command to receive a new nft`;
   ctx.reply(message);
 });
