@@ -82,7 +82,8 @@ bot.start((ctx) => {
   ctx.reply(message);
 });
 
-bot.command("eth", async (ctx) => {
+bot.command("eth", async (ctx, msg) => {
+  console.log(msg, "msg================");
   try {
     ctx.reply(
       "Please use the /ethId or /ethName command to search NFT Collections"
@@ -94,7 +95,6 @@ bot.command("eth", async (ctx) => {
 });
 
 bot.command("ethId", async (ctx, msg) => {
-  console.log(msg, "------------");
   try {
     ctx.reply("Please Input the Collection ID");
     Myctx = ctx;
