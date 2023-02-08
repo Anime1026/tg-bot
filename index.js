@@ -15,15 +15,24 @@ const InputCallBack = (msg) => {
   console.log(msg, "msg-------------------");
   let cmdData = msg.update.message.text.split(" ");
   console.log(cmdData, "cmdData");
+  if (cmdData[0] === "/eth") {
+    let key = msg.update.message.text.slice(5);
+    if (key.slice(0, 2) === "0x") {
+      searchCollection_collectionId(key);
+    } else {
+      searchCollection_collectionName(key);
+    }
+  } else if (cmdData[0] === "/eth") {
+    Myctx.reply("this is solana");
+  }
   //   if (cash === "ethId") {
-  //     searchCollection_collectionId(msg);
   //   } else if (cash === "ethName") {
   //     searchCollection_collectionName(msg);
   //   }
 };
 
 const searchCollection_collectionId = (msg) => {
-  const id = msg.update.message.text;
+  const id = msg;
   const options = {
     method: "GET",
     url: `https://api.reservoir.tools/collections/v5?id=${id}`,
@@ -43,7 +52,7 @@ const searchCollection_collectionId = (msg) => {
     });
 };
 const searchCollection_collectionName = async (msg) => {
-  const collectionName = msg.update.message.text;
+  const collectionName = msg;
   const options = {
     method: "GET",
     url: `https://api.reservoir.tools/search/collections/v1?name=${collectionName}&limit=1`,
