@@ -38,25 +38,29 @@ const searchCollection_collectionName = async (ctx, msg) => {
   axios
     .request(options)
     .then((response) => {
-      const options2 = {
-        method: "GET",
-        url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
-        headers: {
-          accept: "*/*",
-          "x-api-key": "abb98582ec0343268a2fd47cfdf46036",
-        },
-      };
+      console.log(
+        response.data.collections[0].collectionId,
+        "---------------------"
+      );
+      //   const options2 = {
+      //     method: "GET",
+      //     url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
+      //     headers: {
+      //       accept: "*/*",
+      //       "x-api-key": "abb98582ec0343268a2fd47cfdf46036",
+      //     },
+      //   };
 
-      axios
-        .request(options2)
-        .then((res) => {
-          ctx.reply(`
-            Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
-        })
-        .catch((err) => {
-          console.error(err);
-          ctx.reply("Can`t find this collection");
-        });
+      //   axios
+      //     .request(options2)
+      //     .then((res) => {
+      //       ctx.reply(`
+      //         Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
+      //     })
+      //     .catch((err) => {
+      //       console.error(err);
+      //       ctx.reply("Can`t find this collection");
+      //     });
     })
     .catch((err) => {
       console.error(err);
