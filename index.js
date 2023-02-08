@@ -8,7 +8,7 @@ dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const searchCollection_collectionId = async (bot, msg) => {
+const searchCollection_collectionId = async (ctx, msg) => {
   const id = msg.update.message.text;
   const options = {
     method: "GET",
@@ -19,15 +19,15 @@ const searchCollection_collectionId = async (bot, msg) => {
   axios
     .request(options)
     .then((response) => {
-      let reply = `Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`;
-      bot.sendMessage(msg.chat.id, reply);
+      ctx.reply(`
+        Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`);
     })
     .catch((err) => {
       console.error(err);
-      bot.sendMessage(msg.chat.id, "Collection Id is not Valid");
+      ctx.reply("Collection Id is not Valid");
     });
 };
-const searchCollection_collectionName = async (bot, msg) => {
+const searchCollection_collectionName = async (ctx, msg) => {
   const collectionName = msg.update.message.text;
   const options = {
     method: "GET",
@@ -51,19 +51,17 @@ const searchCollection_collectionName = async (bot, msg) => {
         .request(options2)
         .then((res) => {
           console.log(res.data.collections[0], "res.data00000000000");
-          bot.sendMessage(
-            msg.chat.id,
-            `Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
-          );
+          ctx.reply(`
+                Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
         })
         .catch((err) => {
           console.error(err);
-          bot.sendMessage(msg.chat.id, "Can`t find this collection");
+          ctx.reply("Can`t find this collection");
         });
     })
     .catch((err) => {
       console.error(err);
-      bot.sendMessage(msg.chat.id, "Can`t find this collection");
+      ctx.reply("Can`t find this collection");
     });
 };
 
@@ -117,7 +115,7 @@ bot.command("ethId", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection ID");
     bot.on("message", (msg) => {
-      searchCollection_collectionId(bot, msg);
+      searchCollection_collectionId(ctx, msg);
     });
   } catch (error) {
     console.log("error", error);
@@ -129,7 +127,7 @@ bot.command("ethName", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection Name");
     bot.on("message", (msg) => {
-      searchCollection_collectionName(bot, msg);
+      searchCollection_collectionName(ctx, msg);
     });
   } catch (error) {
     console.log("error", error);
