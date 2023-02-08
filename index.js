@@ -7,19 +7,19 @@ dotenv.config();
 // let factGenerator = require("./factGenerator");
 
 let cash = "";
-let ctx;
+let Myctx;
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const InputCallBack = (msg) => {
   if (cash === "ethId") {
-    searchCollection_collectionId(ctx, msg);
+    searchCollection_collectionId(msg);
   } else if (cash === "ethName") {
-    searchCollection_collectionName(ctx, msg);
+    searchCollection_collectionName(msg);
   }
 };
 
-const searchCollection_collectionId = async (ctx, msg) => {
+const searchCollection_collectionId = (msg) => {
   const id = msg.update.message.text;
   const options = {
     method: "GET",
@@ -30,15 +30,15 @@ const searchCollection_collectionId = async (ctx, msg) => {
   axios
     .request(options)
     .then((response) => {
-      ctx.reply(`
+      Myctx.reply(`
         Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`);
     })
     .catch((err) => {
       console.error(err);
-      ctx.reply("Collection Id is not Valid");
+      Myctx.reply("Collection Id is not Valid");
     });
 };
-const searchCollection_collectionName = async (ctx, msg) => {
+const searchCollection_collectionName = async (msg) => {
   const collectionName = msg.update.message.text;
   const options = {
     method: "GET",
@@ -61,17 +61,17 @@ const searchCollection_collectionName = async (ctx, msg) => {
       axios
         .request(options2)
         .then((res) => {
-          ctx.reply(`
+          Myctx.reply(`
                 Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
         })
         .catch((err) => {
           console.error(err);
-          ctx.reply("Can`t find this collection");
+          Myctx.reply("Can`t find this collection");
         });
     })
     .catch((err) => {
       console.error(err);
-      ctx.reply("Can`t find this collection");
+      Myctx.reply("Can`t find this collection");
     });
 };
 
@@ -106,7 +106,6 @@ const searchCollection_collectionName = async (ctx, msg) => {
 // testFunc();
 
 bot.start((ctx) => {
-  ctx = ctx;
   let message = `Please use the /eth or /sol command to receive a new nft`;
   ctx.reply(message);
 });
@@ -125,6 +124,7 @@ bot.command("eth", async (ctx) => {
 bot.command("ethId", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection ID");
+    Myctx = ctx;
     cash = "ethId";
     // bot.on("message", (msg) => {
     //   searchCollection_collectionId(ctx, msg);
@@ -139,6 +139,7 @@ bot.command("ethId", async (ctx) => {
 bot.command("ethName", async (ctx) => {
   try {
     ctx.reply("Please Input the Collection Name");
+    Myctx = ctx;
     cash = "ethName";
     // bot.on("message", (msg) => {
     //   searchCollection_collectionName(ctx, msg);
