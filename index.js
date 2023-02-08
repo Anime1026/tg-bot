@@ -12,11 +12,12 @@ let Myctx;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const InputCallBack = (msg) => {
-  if (cash === "ethId") {
-    searchCollection_collectionId(msg);
-  } else if (cash === "ethName") {
-    searchCollection_collectionName(msg);
-  }
+  console.log(msg, "msg-------------------");
+  //   if (cash === "ethId") {
+  //     searchCollection_collectionId(msg);
+  //   } else if (cash === "ethName") {
+  //     searchCollection_collectionName(msg);
+  //   }
 };
 
 const searchCollection_collectionId = (msg) => {
@@ -82,48 +83,48 @@ bot.start((ctx) => {
   ctx.reply(message);
 });
 
-bot.command("eth", async (ctx, msg) => {
-  console.log(msg, "msg================");
-  try {
-    ctx.reply(
-      "Please use the /ethId or /ethName command to search NFT Collections"
-    );
-  } catch (error) {
-    console.log("error", error);
-    ctx.reply("Sorry, please again");
-  }
-});
+// bot.command("eth", async (ctx, msg) => {
+//   console.log(msg, "msg================");
+//   try {
+//     ctx.reply(
+//       "Please use the /ethId or /ethName command to search NFT Collections"
+//     );
+//   } catch (error) {
+//     console.log("error", error);
+//     ctx.reply("Sorry, please again");
+//   }
+// });
 
-bot.command("ethId", async (ctx, msg) => {
-  try {
-    ctx.reply("Please Input the Collection ID");
-    Myctx = ctx;
-    cash = "ethId";
-  } catch (error) {
-    console.log("error", error);
-    ctx.reply("Sorry, please again");
-  }
-});
+// bot.command("ethId", async (ctx, msg) => {
+//   try {
+//     ctx.reply("Please Input the Collection ID");
+//     Myctx = ctx;
+//     cash = "ethId";
+//   } catch (error) {
+//     console.log("error", error);
+//     ctx.reply("Sorry, please again");
+//   }
+// });
 
-bot.command("ethName", async (ctx) => {
-  try {
-    ctx.reply("Please Input the Collection Name");
-    Myctx = ctx;
-    cash = "ethName";
-  } catch (error) {
-    console.log("error", error);
-    ctx.reply("Sorry, please again");
-  }
-});
+// bot.command("ethName", async (ctx) => {
+//   try {
+//     ctx.reply("Please Input the Collection Name");
+//     Myctx = ctx;
+//     cash = "ethName";
+//   } catch (error) {
+//     console.log("error", error);
+//     ctx.reply("Sorry, please again");
+//   }
+// });
 
-bot.command("sol", async (ctx) => {
-  try {
-    ctx.reply("Please Input the Solana Contract Address");
-  } catch (error) {
-    console.log("error", error);
-    ctx.reply("Sorry, please again");
-  }
-});
+// bot.command("sol", async (ctx) => {
+//   try {
+//     ctx.reply("Please Input the Solana Contract Address");
+//   } catch (error) {
+//     console.log("error", error);
+//     ctx.reply("Sorry, please again");
+//   }
+// });
 
 bot.on("message", (msg) => {
   InputCallBack(msg);
