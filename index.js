@@ -38,10 +38,6 @@ const searchCollection_collectionName = async (ctx, msg) => {
   axios
     .request(options)
     .then((response) => {
-      console.log(
-        response.data.collections[0].collectionId,
-        "response.data---------------------"
-      );
       const options2 = {
         method: "GET",
         url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
@@ -54,9 +50,9 @@ const searchCollection_collectionName = async (ctx, msg) => {
       axios
         .request(options2)
         .then((res) => {
-          console.log(res.data, "res.data00000000000");
-          //   ctx.reply(`
-          //       Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
+          console.log(res.data.collections[0], "res.data00000000000");
+          ctx.reply(`
+                Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
         })
         .catch((err) => {
           console.error(err);
