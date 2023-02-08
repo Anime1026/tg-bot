@@ -22,8 +22,9 @@ const InputCallBack = (msg) => {
     } else {
       searchCollection_collectionName(key);
     }
-  } else if (cmdData[0] === "/eth") {
-    Myctx.reply("this is solana");
+  } else if (cmdData[0] === "/sol") {
+    let key = msg.update.message.text.slice(5);
+    searchCollection_solCollectionName(key);
   }
 };
 
@@ -86,6 +87,24 @@ const searchCollection_collectionName = async (msg) => {
           console.error(err);
           Myctx.reply("Can`t find this collection");
         });
+    })
+    .catch((err) => {
+      console.error(err);
+      Myctx.reply("Can`t find this collection");
+    });
+};
+
+const searchCollection_solCollectionName = async (msg) => {
+  const options = {
+    method: "GET",
+    url: `https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=${msg}`,
+    headers: { accept: "*/*" },
+  };
+
+  axios
+    .request(options)
+    .then((response) => {
+      console.log(response.data, "response==================");
     })
     .catch((err) => {
       console.error(err);
