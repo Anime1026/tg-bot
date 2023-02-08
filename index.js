@@ -19,7 +19,7 @@ const searchCollection_collectionId = async (bot, msg) => {
   axios
     .request(options)
     .then((response) => {
-      res.send(response.data);
+      console.log(response.data);
     })
     .catch((err) => console.error(err));
 };
