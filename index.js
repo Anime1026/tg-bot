@@ -24,6 +24,36 @@ const searchCollection_collectionId = async (ctx, msg) => {
     })
     .catch((err) => console.error(err));
 };
+const searchCollection_collectionName = async (ctx, msg) => {
+  const collectionName = msg.update.message.text;
+  const options = {
+    method: "GET",
+    url: `https://api.reservoir.tools/search/collections/v1?name=${collectionName}&limit=1`,
+    headers: { accept: "*/*", "x-api-key": "abb98582ec0343268a2fd47cfdf46036" },
+  };
+
+  axios
+    .request(options)
+    .then((response) => {
+      const options2 = {
+        method: "GET",
+        url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
+        headers: {
+          accept: "*/*",
+          "x-api-key": "abb98582ec0343268a2fd47cfdf46036",
+        },
+      };
+
+      axios
+        .request(options2)
+        .then((res) => {
+          ctx.reply(`
+            Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
+        })
+        .catch((err) => console.error(err));
+    })
+    .catch((err) => console.error(err));
+};
 
 // const testFunc = () => {
 //   const options = {
@@ -73,9 +103,21 @@ bot.command("eth", async (ctx) => {
 
 bot.command("ethId", async (ctx) => {
   try {
-    ctx.reply("Please Input the CollectionName");
+    ctx.reply("Please Input the Collection ID");
     bot.on("message", (msg) => {
       searchCollection_collectionId(ctx, msg);
+    });
+  } catch (error) {
+    console.log("error", error);
+    ctx.reply("Sorry, please again");
+  }
+});
+
+bot.command("ethName", async (ctx) => {
+  try {
+    ctx.reply("Please Input the Collection Name");
+    bot.on("message", (msg) => {
+      searchCollection_collectionName(ctx, msg);
     });
   } catch (error) {
     console.log("error", error);
