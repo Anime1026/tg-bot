@@ -22,7 +22,10 @@ const searchCollection_collectionId = async (ctx, msg) => {
       ctx.reply(`
         Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      ctx.reply("Collection Id is not Valid");
+    });
 };
 const searchCollection_collectionName = async (ctx, msg) => {
   const collectionName = msg.update.message.text;
@@ -50,9 +53,15 @@ const searchCollection_collectionName = async (ctx, msg) => {
           ctx.reply(`
             Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          ctx.reply("Can`t find this collection");
+        });
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      ctx.reply("Can`t find this collection");
+    });
 };
 
 // const testFunc = () => {
