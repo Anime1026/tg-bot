@@ -10,12 +10,12 @@ let cash = "";
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const InputCallBack = async (ctx, msg) => {
+const InputCallBack = (msg) => {
   console.log(msg, "msg getting-0000000000000000000");
   if (cash === "ethId") {
-    await searchCollection_collectionId(ctx, msg);
+    // searchCollection_collectionId(ctx, msg);
   } else if (cash === "ethName") {
-    await searchCollection_collectionName(ctx, msg);
+    // searchCollection_collectionName(ctx, msg);
   }
 };
 
@@ -159,8 +159,8 @@ bot.command("sol", async (ctx) => {
   }
 });
 
-bot.on("message", async (ctx, msg) => {
-  InputCallBack(ctx, msg);
+bot.on("message", (msg) => {
+  InputCallBack(msg);
 });
 
 bot.launch();
