@@ -13,6 +13,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const InputCallBack = (msg) => {
   console.log(msg, "msg-------------------");
+  let cmdData = msg.update.message.text.split(" ");
+  console.log(cmdData, "cmdData");
   //   if (cash === "ethId") {
   //     searchCollection_collectionId(msg);
   //   } else if (cash === "ethName") {
@@ -80,6 +82,7 @@ const searchCollection_collectionName = async (msg) => {
 
 bot.start((ctx) => {
   let message = `Please use the /eth or /sol command to receive a new nft`;
+  Myctx = ctx;
   ctx.reply(message);
 });
 
@@ -126,7 +129,7 @@ bot.start((ctx) => {
 //   }
 // });
 
-bot.on("message", (msg) => {
+bot.on("message", async (msg) => {
   InputCallBack(msg);
 });
 
