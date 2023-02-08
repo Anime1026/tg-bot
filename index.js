@@ -163,7 +163,7 @@ bot.command("sol", async (ctx) => {
   }
 });
 
-bot.onText(RegExp(""), async (ctx, msg) => {
+bot.on("message", async (ctx, msg) => {
   InputCallBack(ctx, msg);
 });
 
