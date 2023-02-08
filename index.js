@@ -116,6 +116,7 @@ bot.command("ethId", async (ctx) => {
     ctx.reply("Please Input the Collection ID");
     bot.on("message", (msg) => {
       searchCollection_collectionId(ctx, msg);
+      return next();
     });
   } catch (error) {
     console.log("error", error);
@@ -128,6 +129,7 @@ bot.command("ethName", async (ctx) => {
     ctx.reply("Please Input the Collection Name");
     bot.on("message", (msg) => {
       searchCollection_collectionName(ctx, msg);
+      return next();
     });
   } catch (error) {
     console.log("error", error);
