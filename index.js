@@ -32,6 +32,7 @@ const searchCollection_collectionId = (msg) => {
     .then((response) => {
       Myctx.reply(`
         Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`);
+      Myctx.reply("If you wanna change network, use /eth or /sol command");
     })
     .catch((err) => {
       console.error(err);
@@ -63,6 +64,7 @@ const searchCollection_collectionName = async (msg) => {
         .then((res) => {
           Myctx.reply(`
                 Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
+          Myctx.reply("If you wanna change network, use /eth or /sol command");
         })
         .catch((err) => {
           console.error(err);
@@ -74,36 +76,6 @@ const searchCollection_collectionName = async (msg) => {
       Myctx.reply("Can`t find this collection");
     });
 };
-
-// const testFunc = () => {
-//   const options = {
-//     method: "GET",
-//     url: `https://api.reservoir.tools/collections/v5?id=0x8d04a8c79ceb0889bdd12acdf3fa9d207ed3ff63`,
-//     headers: {
-//       accept: "*/*",
-//       "x-api-key": "abb98582ec0343268a2fd47cfdf46036",
-//     },
-//   };
-
-//   axios
-//     .request(options)
-//     .then((response) => {
-//       console.log(
-//         response.data.collections[0].name,
-//         "name",
-//         response.data.collections[0].id,
-//         "id",
-//         response.data.collections[0].floorAsk.price.amount.native,
-//         "price",
-//         response.data.collections[0].volume.allTime,
-//         "volume",
-//         response.data.collections[0]
-//       );
-//     })
-//     .catch((err) => console.error(err));
-// };
-
-// testFunc();
 
 bot.start((ctx) => {
   let message = `Please use the /eth or /sol command to receive a new nft`;
@@ -126,10 +98,6 @@ bot.command("ethId", async (ctx) => {
     ctx.reply("Please Input the Collection ID");
     Myctx = ctx;
     cash = "ethId";
-    // bot.on("message", (msg) => {
-    //   searchCollection_collectionId(ctx, msg);
-    //   return;
-    // });
   } catch (error) {
     console.log("error", error);
     ctx.reply("Sorry, please again");
@@ -141,10 +109,6 @@ bot.command("ethName", async (ctx) => {
     ctx.reply("Please Input the Collection Name");
     Myctx = ctx;
     cash = "ethName";
-    // bot.on("message", (msg) => {
-    //   searchCollection_collectionName(ctx, msg);
-    //   return;
-    // });
   } catch (error) {
     console.log("error", error);
     ctx.reply("Sorry, please again");
