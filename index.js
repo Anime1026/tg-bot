@@ -93,7 +93,8 @@ bot.command("eth", async (ctx) => {
   }
 });
 
-bot.command("ethId", async (ctx) => {
+bot.command("ethId", async (ctx, msg) => {
+  console.log(msg, "------------");
   try {
     ctx.reply("Please Input the Collection ID");
     Myctx = ctx;
