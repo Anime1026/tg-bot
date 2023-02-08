@@ -29,6 +29,7 @@ const searchCollection_collectionId = async (ctx, msg) => {
 };
 const searchCollection_collectionName = async (ctx, msg) => {
   const collectionName = msg.update.message.text;
+  console.log(collectionName, "collectionName===========");
   const options = {
     method: "GET",
     url: `https://api.reservoir.tools/search/collections/v1?name=${collectionName}&limit=1`,
@@ -38,10 +39,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
   axios
     .request(options)
     .then((response) => {
-      console.log(
-        response.data.collections[0].collectionId,
-        "---------------------"
-      );
+      console.log(response.data, "response.data---------------------");
       //   const options2 = {
       //     method: "GET",
       //     url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
