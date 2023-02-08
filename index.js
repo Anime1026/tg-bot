@@ -20,10 +20,10 @@ const searchCollection_collectionId = async (ctx, msg) => {
     .request(options)
     .then((response) => {
       ctx.reply(`
-      Name: ${response.data.collections[0].name}
-      ID: ${response.data.collections[0].id}
-      Price: ${response.data.collections[0].floorAsk.price.amount.native}ETH
-      Volume: ${response.data.collections[0].volume.allTime}
+        Name: ${response.data.collections[0].name}
+        ID: ${response.data.collections[0].id}
+        Price: ${response.data.collections[0].floorAsk.price.amount.native}ETH
+        Volume: ${response.data.collections[0].volume.allTime}
       `);
       console.log(response.data);
     })
