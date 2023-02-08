@@ -13,13 +13,14 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const InputCallBack = async (ctx, msg) => {
   console.log(msg, "msg getting-0000000000000000000");
   if (cash === "ethId") {
-    searchCollection_collectionId(ctx, msg);
+    await searchCollection_collectionId(ctx, msg);
   } else if (cash === "ethName") {
-    searchCollection_collectionName(ctx, msg);
+    await searchCollection_collectionName(ctx, msg);
   }
 };
 
 const searchCollection_collectionId = async (ctx, msg) => {
+  console.log(msg, "msg------------------------");
   const id = msg.update.message.text;
   const options = {
     method: "GET",
@@ -32,10 +33,6 @@ const searchCollection_collectionId = async (ctx, msg) => {
     .then((response) => {
       ctx.reply(`
         Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`);
-      bot.start((ctx) => {
-        let message = `Please use the /eth or /sol command to receive a new nft`;
-        ctx.reply(message);
-      });
     })
     .catch((err) => {
       console.error(err);
@@ -65,7 +62,6 @@ const searchCollection_collectionName = async (ctx, msg) => {
       axios
         .request(options2)
         .then((res) => {
-          console.log(res.data.collections[0], "res.data00000000000");
           ctx.reply(`
                 Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`);
         })
