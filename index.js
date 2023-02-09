@@ -42,7 +42,7 @@ const searchCollection_collectionId = (msg) => {
     .then(async (response) => {
       await Myctx.telegram.sendMessage(
         Myctx.message.chat.id,
-        `Name: ${response.data.collections[0].name}\nID: ${response.data.collections[0].id}\nPrice: ${response.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${response.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${response.data.collections[0].volumeChange["1day"]}\n7Day: ${response.data.collections[0].volumeChange["7day"]}\n30Day: ${response.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${response.data.collections[0].floorSale["1day"]}\n7Day: ${response.data.collections[0].floorSale["7day"]}\n30Day: ${response.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`
+        `📜 Name: ${response.data.collections[0].name}\n📱ID: ${response.data.collections[0].id}\n💰 Price: ${response.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${response.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${response.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${response.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${response.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${response.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${response.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${response.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n`
       );
     })
     .catch((err) => {
@@ -75,7 +75,7 @@ const searchCollection_collectionName = async (msg) => {
         .then(async (res) => {
           await Myctx.telegram.sendMessage(
             Myctx.message.chat.id,
-            `Name: ${res.data.collections[0].name}\nID: ${res.data.collections[0].id}\nPrice: ${res.data.collections[0].floorAsk.price.amount.native}ETH\nVolume: ${res.data.collections[0].volume.allTime}\nVolume Change:\n1Day: ${res.data.collections[0].volumeChange["1day"]}\n7Day: ${res.data.collections[0].volumeChange["7day"]}\n30Day: ${res.data.collections[0].volumeChange["30day"]}\nFloorSale:\n1Day: ${res.data.collections[0].floorSale["1day"]}\n7Day: ${res.data.collections[0].floorSale["7day"]}\n30Day: ${res.data.collections[0].floorSale["30day"]}\nFloorSale Change:\n1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
+            `📜 Name: ${res.data.collections[0].name}\n📱ID: ${res.data.collections[0].id}\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${res.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${res.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
           );
           Myctx.reply("If you wanna change network, use /eth or /sol command");
         })
@@ -96,7 +96,7 @@ const searchCollection_solCollectionName = async (msg) => {
     .then(async (res) => {
       await Myctx.telegram.sendMessage(
         Myctx.message.chat.id,
-        `Name: ${res.data[0].name}\nFloor Price: ${res.data[0].floor_price}\nTotal Volume: ${res.data[0].me_total_volume}\nTotal Items: ${res.data[0].total_items}\nFloor Cap: ${res.data[0].floor_cap}`
+        `📜 Name: ${res.data[0].name}\n💸 Floor Price: ${res.data[0].floor_price}\n📚 Total Volume: ${res.data[0].me_total_volume}\n📦 Total Items: ${res.data[0].total_items}\n🖨 Floor Cap: ${res.data[0].floor_cap}`
       );
       Myctx.reply("If you wanna change network, use /eth or /sol command");
     })
