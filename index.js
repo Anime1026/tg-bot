@@ -108,11 +108,11 @@ const searchCollection_solCollectionName = async (msg) => {
 
 bot.start((ctx) => {
   let message = `Please use the /eth or /sol command to receive a new nft`;
+  Myctx = ctx;
   ctx.reply(message);
 });
 
-bot.on("message", async (ctx, msg) => {
-  Myctx = ctx;
+bot.on("message", async (msg) => {
   InputCallBack(msg);
 });
 
