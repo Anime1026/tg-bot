@@ -5,24 +5,10 @@ dotenv.config();
 
 let Myctx;
 
-const test = () => {
-  axios
-    .get(
-      "https://price-api.crypto.com/nft/v2/collection/social-information/degenerate_ape_academy?blockchain=2"
-    )
-    .then((res) => {
-      console.log(res.data, "1234567890");
-    });
-};
-
-test();
-
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const InputCallBack = (msg) => {
-  console.log(msg, "msg-------------------");
   let cmdData = msg.update.message.text.split(" ");
-  console.log(cmdData, "cmdData");
   if (cmdData[0] === "/eth") {
     let key = msg.update.message.text.slice(5);
     if (key.slice(0, 2) === "0x") {
@@ -31,7 +17,14 @@ const InputCallBack = (msg) => {
       searchCollection_collectionName(key);
     }
   } else if (cmdData[0] === "/sol") {
-    let key = msg.update.message.text.slice(5);
+    let key = "";
+    for (let index = 1; index < cmdData.length; index++) {
+      if (index === cmdData.length - 1) {
+        key = key + cmdData[index].toLowerCase();
+      } else {
+        key = key + cmdData[index].toLowerCase() + "_";
+      }
+    }
     searchCollection_solCollectionName(key);
   }
 };
@@ -99,9 +92,7 @@ const searchCollection_collectionName = async (msg) => {
 
 const searchCollection_solCollectionName = async (msg) => {
   axios
-    .get(
-      "https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=degods"
-    )
+    .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
     .then((response) => {
       console.log(response.data, "response==================");
     })
