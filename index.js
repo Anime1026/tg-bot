@@ -77,7 +77,6 @@ const searchCollection_collectionName = async (msg) => {
             Myctx.message.chat.id,
             `📜 Name: ${res.data.collections[0].name}\n📱ID: ${res.data.collections[0].id}\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${res.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${res.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
           );
-          Myctx.reply("If you wanna change network, use /eth or /sol command");
         })
         .catch((err) => {
           console.error(err);
@@ -98,7 +97,6 @@ const searchCollection_solCollectionName = async (msg) => {
         Myctx.message.chat.id,
         `📜 Name: ${res.data[0].name}\n💸 Floor Price: ${res.data[0].floor_price}\n📚 Total Volume: ${res.data[0].me_total_volume}\n📦 Total Items: ${res.data[0].total_items}\n🖨 Floor Cap: ${res.data[0].floor_cap}`
       );
-      Myctx.reply("If you wanna change network, use /eth or /sol command");
     })
     .catch((err) => {
       console.error(err);
