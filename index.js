@@ -96,7 +96,7 @@ const searchCollection_solCollectionName = async (msg) => {
     .then(async (res) => {
       await Myctx.telegram.sendMessage(
         Myctx.message.chat.id,
-        `Name: ${res.data[0].name}\nFloor Price: ${res.data[0].floor_price}\nTotal Volumn: ${res.data[0].me_total_volumn}\nTotal Items: ${res.data[0].total_items}\nFloor Cap: ${res.data[0].floor_cap}`
+        `Name: ${res.data[0].name}\nFloor Price: ${res.data[0].floor_price}\nTotal Volume: ${res.data[0].me_total_volume}\nTotal Items: ${res.data[0].total_items}\nFloor Cap: ${res.data[0].floor_cap}`
       );
       Myctx.reply("If you wanna change network, use /eth or /sol command");
     })
