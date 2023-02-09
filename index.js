@@ -93,8 +93,12 @@ const searchCollection_collectionName = async (msg) => {
 const searchCollection_solCollectionName = async (msg) => {
   axios
     .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
-    .then((response) => {
-      console.log(response.data, "response==================");
+    .then(async (res) => {
+      await Myctx.telegram.sendMessage(
+        Myctx.message.chat.id,
+        `Name: ${res.data[0].name}\nFloor Price: ${res.data[0].floor_price}\nTotal Volumn: ${res.data[0].me_total_volumn}\nTotal Items: ${res.data[0].total_items}\nFloor Cap: ${res.data[0].floor_cap}`
+      );
+      Myctx.reply("If you wanna change network, use /eth or /sol command");
     })
     .catch((err) => {
       console.error(err);
