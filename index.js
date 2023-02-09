@@ -22,7 +22,7 @@ const InputCallBack = (msg) => {
       if (index === cmdData.length - 1) {
         key = key + cmdData[index].toLowerCase();
       } else {
-        key = key + cmdData[index].toLowerCase() + "_";
+        key = key + cmdData[index].toLowerCase() + "-";
       }
     }
     searchCollection_solCollectionName(key);
