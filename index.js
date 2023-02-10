@@ -156,11 +156,6 @@ const searchCollection_collectionName = async (msg) => {
           bot.telegram.sendPhoto(Myctx.chat.id, {
             url: "https://avatars.githubusercontent.com/u/105542355?s=400&u=c47d5f00857cb8fad300c91cc7590ee5b4c86fe1&v=4",
           });
-
-          // Myctx.telegram.replyWithPhoto(
-          //   Myctx.message.chat.id,
-          //   "https://avatars.githubusercontent.com/u/105542355?s=400&u=c47d5f00857cb8fad300c91cc7590ee5b4c86fe1&v=4"
-          // );
         })
         .catch((err) => {
           console.error(err);
