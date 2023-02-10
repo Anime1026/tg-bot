@@ -153,7 +153,7 @@ const searchCollection_collectionName = async (msg) => {
 
           bot.telegram.sendPhoto(Myctx.chat.id, {
             source:
-              "https://avatars.githubusercontent.com/u/105542355?s=400&u=c47d5f00857cb8fad300c91cc7590ee5b4c86fe1&v=4",
+              "https://i.seadn.io/gcs/files/d0854d1e752d9558996a3411af31425c.png?auto=format&w=256",
           });
 
           // Myctx.telegram.replyWithPhoto(
