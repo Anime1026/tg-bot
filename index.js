@@ -152,8 +152,7 @@ const searchCollection_collectionName = async (msg) => {
           });
 
           bot.telegram.sendPhoto(Myctx.chat.id, {
-            source:
-              "https://i.seadn.io/gcs/files/d0854d1e752d9558996a3411af31425c.png?auto=format&w=256",
+            url: "https://i.seadn.io/gcs/files/d0854d1e752d9558996a3411af31425c.png",
           });
 
           // Myctx.telegram.replyWithPhoto(
