@@ -138,6 +138,19 @@ const searchCollection_collectionName = async (msg) => {
             `📜 Name: ${res.data.collections[0].name}\n📱ID: ${res.data.collections[0].id}\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${res.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${res.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
           );
 
+          const dataUrl = await chartJSNodeCanvas.renderToDataURL(
+            configuration
+          );
+          const base64Image = dataUrl;
+
+          var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+
+          fs.writeFile("out.png", base64Data, "base64", function (err) {
+            if (err) {
+              console.log(err);
+            }
+          });
+
           bot.hears(
             "photo",
             Myctx.replyWithPhoto({ url: dataUrl }, { caption: "cat photo" })
