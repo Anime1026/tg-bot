@@ -161,7 +161,7 @@ const searchCollection_collectionName = async (msg) => {
           filestack_client
             .upload(image_file)
             .then((res) => {
-              console.log("success: ", res);
+              bot.telegram.sendPhoto(Myctx.chat.id, res.url);
             })
             .catch((err) => {
               console.log(err);
@@ -170,11 +170,6 @@ const searchCollection_collectionName = async (msg) => {
           // const image_file = fs.createReadStream(
           //   path.join(__dirname, "out.png")
           // );
-
-          bot.telegram.sendPhoto(
-            Myctx.chat.id,
-            "https://cdn.filestackcontent.com/xhWEWgbJTyzn8HudpEXA"
-          );
         })
         .catch((err) => {
           console.error(err);
