@@ -116,7 +116,7 @@ const searchCollection_collectionName = async (msg) => {
           let data = await axios.get(url);
 
           let configuration = {
-            type: "line", // for line chart
+            type: "line",
             data: {
               labels: [],
               datasets: [
@@ -126,7 +126,7 @@ const searchCollection_collectionName = async (msg) => {
                   fill: false,
                   borderColor: ["rgb(51, 204, 204)"],
                   borderWidth: 1,
-                  xAxisID: "xAxis1", //define top or bottom axis ,modifies on scale
+                  xAxisID: "xAxis1",
                 },
               ],
             },
@@ -147,7 +147,7 @@ const searchCollection_collectionName = async (msg) => {
               curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
             ).getDate();
             configuration.data.labels.push(DateNum);
-            configuration.data.datasets.data.push(
+            configuration.data.datasets[0].data.push(
               Number(element.floorAsk.price)
             );
           }
