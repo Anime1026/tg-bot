@@ -156,7 +156,7 @@ const searchCollection_collectionName = async (msg) => {
             }
           });
 
-          const image_file = fs.createReadStream("out.png");
+          const image_file = fs.readFileSync("out.png");
 
           filestack_client
             .upload(image_file)
