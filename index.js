@@ -140,15 +140,15 @@ const searchCollection_collectionName = async (msg) => {
           );
 
           const dataUrl = await chartJSNodeCanvas.renderToStream(configuration);
-          const base64Image = dataUrl;
+          // const base64Image = dataUrl;
 
-          var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+          // var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
 
-          fs.writeFile("out.png", base64Data, "base64", function (err) {
-            if (err) {
-              console.log(err);
-            }
-          });
+          // fs.writeFile("out.png", base64Data, "base64", function (err) {
+          //   if (err) {
+          //     console.log(err);
+          //   }
+          // });
 
           console.log(dataUrl, "dataUrl--------------------------");
 
