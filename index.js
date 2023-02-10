@@ -154,11 +154,14 @@ const searchCollection_collectionName = async (msg) => {
 
           console.log(dataUrl, "dataUrl--------------------------");
 
-          const image_file = fs.createReadStream(
+          // const image_file = fs.createReadStream(
+          //   path.join(__dirname, "out.png")
+          // );
+
+          bot.telegram.sendPhoto(
+            Myctx.chat.id,
             path.join(__dirname, "out.png")
           );
-
-          bot.telegram.sendPhoto(Myctx.chat.id, image_file);
         })
         .catch((err) => {
           console.error(err);
