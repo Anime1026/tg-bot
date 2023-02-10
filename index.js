@@ -1,8 +1,8 @@
-import axios from "axios";
-import { Telegraf } from "telegraf";
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-import fs from "fs";
-import ChartJSNodeCanvas from "chartjs-node-canvas";
+const axios = require("axios");
+const { Telegraf } = require("telegraf");
+const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+const fs = require("fs");
+const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
 
 const width = 400; //px
 const height = 400; //px
@@ -48,8 +48,8 @@ const configuration = {
 dotenv.config();
 
 let Myctx;
-
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const token = process.env.BOT_TOKEN;
+const bot = new Telegraf(token);
 
 const InputCallBack = (msg) => {
   let cmdData = msg.update.message.text.split(" ");
