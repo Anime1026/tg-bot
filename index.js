@@ -3,6 +3,7 @@ const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const fs = require("fs");
 const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
+const path = require("path");
 
 const width = 400; //px
 const height = 400; //px
@@ -154,7 +155,7 @@ const searchCollection_collectionName = async (msg) => {
           console.log(dataUrl, "dataUrl--------------------------");
 
           bot.telegram.sendPhoto(Myctx.chat.id, {
-            url: dataUrl,
+            url: path.join(__dirname, "out.png"),
           });
         })
         .catch((err) => {
