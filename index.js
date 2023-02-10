@@ -115,7 +115,7 @@ const searchCollection_collectionName = async (msg) => {
 
           let data = await axios.get(url);
 
-          const configuration = {
+          let configuration = {
             type: "line", // for line chart
             data: {
               labels: [],
