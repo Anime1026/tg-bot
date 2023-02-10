@@ -99,6 +99,10 @@ const searchCollection_collectionId = (msg) => {
         Myctx.message.chat.id,
         `📜 Name: ${response.data.collections[0].name}\n📱ID: ${response.data.collections[0].id}\n💰 Price: ${response.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${response.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${response.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${response.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${response.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${response.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${response.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${response.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${response.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${response.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${response.data.collections[0].floorSaleChange["30day"]}\n${dataUrl}`
       );
+
+      await Myctx.telegram.replyWithPhoto(Myctx.message.chat.id, {
+        source: dataUrl,
+      });
     })
     .catch((err) => {
       console.error(err);
