@@ -139,31 +139,42 @@ const searchCollection_collectionName = async (msg) => {
             },
           };
 
-          console.log(data, "data=============");
+          const curDate = new Date().valueOf();
 
-          // const dataUrl = await chartJSNodeCanvas.renderToDataURL(
-          //   configuration
-          // );
-          // const base64Image = dataUrl;
+          for (let index = 0; index < data.data.events.length; index++) {
+            const element = data.data.events[index];
+            const DateNum = new Date(
+              curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
+            ).getDate();
+            configuration.data.labels.push(DateNum);
+            configuration.data.datasets.data.push(
+              Number(element.floorAsk.price)
+            );
+          }
 
-          // var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+          const dataUrl = await chartJSNodeCanvas.renderToDataURL(
+            configuration
+          );
+          const base64Image = dataUrl;
 
-          // fs.writeFile("out.png", base64Data, "base64", function (err) {
-          //   if (err) {
-          //     console.log(err);
-          //   }
-          // });
+          var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
 
-          // const image_file = fs.readFileSync("out.png");
+          fs.writeFile("out.png", base64Data, "base64", function (err) {
+            if (err) {
+              console.log(err);
+            }
+          });
 
-          // filestack_client
-          //   .upload(image_file)
-          //   .then((res) => {
-          //     bot.telegram.sendPhoto(Myctx.chat.id, res.url);
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
+          const image_file = fs.readFileSync("out.png");
+
+          filestack_client
+            .upload(image_file)
+            .then((res) => {
+              bot.telegram.sendPhoto(Myctx.chat.id, res.url);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.error(err);
