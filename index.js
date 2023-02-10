@@ -1,9 +1,25 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
+const server = require("http").Server(app);
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const fs = require("fs");
 const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
 const path = require("path");
+const uniqid = require("uniqid");
+
+app.use(cors({ origin: "*" }));
+app.use(express.static("./uploads"));
+app.use(bodyParser.json({ limit: "15360mb", type: "application/json" }));
+app.use(bodyParser.urlencoded({ extended: true }));
+server.listen(5500, () => {
+  console.log(`Started server on => http://localhost:${5500}`);
+});
+
+// ----------------
 
 const width = 400; //px
 const height = 400; //px
@@ -145,12 +161,18 @@ const searchCollection_collectionName = async (msg) => {
           const base64Image = dataUrl;
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+          var file_name = Date.now() + uniqid() + ".png";
 
-          fs.writeFile("out.png", base64Data, "base64", function (err) {
-            if (err) {
-              console.log(err);
+          fs.writeFile(
+            path.join(__dirname, "uploads", file_name),
+            base64Data,
+            "base64",
+            function (err) {
+              if (err) {
+                console.log(err);
+              }
             }
-          });
+          );
 
           console.log(dataUrl, "dataUrl--------------------------");
 
@@ -158,7 +180,10 @@ const searchCollection_collectionName = async (msg) => {
           //   path.join(__dirname, "out.png")
           // );
 
-          bot.telegram.sendPhoto(Myctx.chat.id, "out.png");
+          bot.telegram.sendPhoto(
+            Myctx.chat.id,
+            "http://154.91.0.83:5500/" + file_name
+          );
         })
         .catch((err) => {
           console.error(err);
