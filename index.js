@@ -152,6 +152,8 @@ const searchCollection_collectionName = async (msg) => {
             );
           }
 
+          console.log(configuration, "configuration---=====");
+
           const dataUrl = await chartJSNodeCanvas.renderToDataURL(
             configuration
           );
