@@ -182,7 +182,7 @@ const searchCollection_collectionName = async (msg) => {
 
           bot.telegram.sendPhoto(
             Myctx.chat.id,
-            "http://154.91.0.83:5500/" + file_name
+            "https://cdn.filestackcontent.com/xhWEWgbJTyzn8HudpEXA"
           );
         })
         .catch((err) => {
