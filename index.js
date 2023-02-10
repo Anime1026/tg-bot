@@ -152,7 +152,7 @@ const searchCollection_collectionName = async (msg) => {
           });
 
           bot.telegram.sendPhoto(Myctx.chat.id, {
-            url: "https://i.seadn.io/gcs/files/d0854d1e752d9558996a3411af31425c.png",
+            url: dataUrl,
           });
 
           // Myctx.telegram.replyWithPhoto(
