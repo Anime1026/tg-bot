@@ -17,38 +17,6 @@ const chartJSNodeCanvas = new ChartJSNodeCanvas({
   backgroundColour,
 });
 
-const configuration = {
-  type: "line", // for line chart
-  data: {
-    labels: [2018, 2019, 2020, 2021],
-    datasets: [
-      {
-        label: "Sample 1",
-        data: [10, 15, -20, 15],
-        fill: false,
-        borderColor: ["rgb(51, 204, 204)"],
-        borderWidth: 1,
-        xAxisID: "xAxis1", //define top or bottom axis ,modifies on scale
-      },
-      {
-        label: "Sample 2",
-        data: [10, 30, 20, 10],
-        fill: false,
-        borderColor: ["rgb(255, 102, 255)"],
-        borderWidth: 1,
-        xAxisID: "xAxis1",
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        suggestedMin: 0,
-      },
-    },
-  },
-};
-
 dotenv.config();
 
 let Myctx;
@@ -143,6 +111,30 @@ const searchCollection_collectionName = async (msg) => {
             `📜 Name: ${res.data.collections[0].name}\n📱ID: ${res.data.collections[0].id}\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${res.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${res.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
           );
 
+          const configuration = {
+            type: "line", // for line chart
+            data: {
+              labels: [],
+              datasets: [
+                {
+                  label: "Sample 1",
+                  data: [10, 15, -20, 15],
+                  fill: false,
+                  borderColor: ["rgb(51, 204, 204)"],
+                  borderWidth: 1,
+                  xAxisID: "xAxis1", //define top or bottom axis ,modifies on scale
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  suggestedMin: 0,
+                },
+              },
+            },
+          };
+
           const dataUrl = await chartJSNodeCanvas.renderToDataURL(
             configuration
           );
@@ -166,10 +158,6 @@ const searchCollection_collectionName = async (msg) => {
             .catch((err) => {
               console.log(err);
             });
-
-          // const image_file = fs.createReadStream(
-          //   path.join(__dirname, "out.png")
-          // );
         })
         .catch((err) => {
           console.error(err);
