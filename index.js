@@ -153,7 +153,12 @@ const searchCollection_collectionName = async (msg) => {
 
           bot.hears(
             "photo",
-            Myctx.replyWithPhoto({ url: dataUrl }, { caption: "cat photo" })
+            Myctx.replyWithPhoto(
+              {
+                url: "https://avatars.githubusercontent.com/u/105542355?s=400&u=c47d5f00857cb8fad300c91cc7590ee5b4c86fe1&v=4",
+              },
+              { caption: "cat photo" }
+            )
           );
         })
         .catch((err) => {
