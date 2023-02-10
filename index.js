@@ -158,10 +158,7 @@ const searchCollection_collectionName = async (msg) => {
           //   path.join(__dirname, "out.png")
           // );
 
-          bot.telegram.sendPhoto(
-            Myctx.chat.id,
-            path.join(__dirname, "out.png")
-          );
+          bot.telegram.sendPhoto(Myctx.chat.id, "out.png");
         })
         .catch((err) => {
           console.error(err);
