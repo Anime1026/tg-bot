@@ -1,8 +1,3 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const app = express();
-const server = require("http").Server(app);
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
@@ -10,15 +5,7 @@ const fs = require("fs");
 const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
 const path = require("path");
 const uniqid = require("uniqid");
-
-app.use(cors({ origin: "*" }));
-app.use(express.static("./uploads"));
-app.use(bodyParser.json({ limit: "15360mb", type: "application/json" }));
-app.use(bodyParser.urlencoded({ extended: true }));
-server.listen(5500, () => {
-  console.log(`Started server on => http://localhost:${5500}`);
-});
-
+const filestack = require("filestack-js");
 // ----------------
 
 const width = 400; //px
@@ -67,6 +54,7 @@ dotenv.config();
 let Myctx;
 const token = process.env.BOT_TOKEN;
 const bot = new Telegraf(token);
+const filestack_client = filestack.init("AOExJh7QSf38cAWgrlIMwz");
 
 const InputCallBack = (msg) => {
   let cmdData = msg.update.message.text.split(" ");
@@ -161,20 +149,23 @@ const searchCollection_collectionName = async (msg) => {
           const base64Image = dataUrl;
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
-          var file_name = Date.now() + uniqid() + ".png";
 
-          fs.writeFile(
-            path.join(__dirname, "uploads", file_name),
-            base64Data,
-            "base64",
-            function (err) {
-              if (err) {
-                console.log(err);
-              }
+          fs.writeFile("out.png", base64Data, "base64", function (err) {
+            if (err) {
+              console.log(err);
             }
-          );
+          });
 
-          console.log(dataUrl, "dataUrl--------------------------");
+          const image_file = fs.createReadStream("out.png");
+
+          filestack_client
+            .upload(image_file)
+            .then((res) => {
+              console.log("success: ", res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
 
           // const image_file = fs.createReadStream(
           //   path.join(__dirname, "out.png")
