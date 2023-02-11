@@ -138,11 +138,11 @@ const searchCollection_collectionId = (msg) => {
               4
             )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
               4
-            )}\n<a target="_blank" href=https://opensea.io/collection/${
+            )}\n [OpenSea Link](https://opensea.io/collection/${
               res.data.collections[0].slug
-            }>OpenSea Link</a> | <a target="_blank" href=https://etherscan.io/token/${
+            }) | [Etherscan Link](https://etherscan.io/token/${
               res.data.collections[0].id
-            }>EtherScan Link</a>`,
+            })`,
           });
         })
         .catch((err) => {
