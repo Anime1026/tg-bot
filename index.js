@@ -138,6 +138,7 @@ const searchCollection_collectionId = (msg) => {
       Myctx.reply("Can`t find this collection");
     });
 };
+
 const searchCollection_collectionName = async (msg) => {
   const collectionName = msg;
   const options = {
@@ -253,6 +254,63 @@ const searchCollection_solCollectionName = async (msg) => {
         Myctx.message.chat.id,
         `📜 Name: ${res.data[0].name}\n💸 Floor Price: ${res.data[0].floor_price}\n📚 Total Volume: ${res.data[0].me_total_volume}\n📦 Total Items: ${res.data[0].total_items}\n🖨 Floor Cap: ${res.data[0].floor_cap}`
       );
+
+      let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/24/${msg}`;
+
+      let data = await axios.get(url);
+
+      let configuration = {
+        type: "line",
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: "Floor Price",
+              data: [],
+              fill: true,
+              borderColor: ["rgb(51, 204, 204)"],
+              borderWidth: 1,
+              xAxisID: "xAxis1",
+            },
+          ],
+        },
+      };
+
+      const curDate = new Date().valueOf();
+
+      configuration.data.datasets[0].data = [];
+      configuration.data.labels = [];
+
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        const DateNum = new Date(element.date).getHours();
+        configuration.data.labels.push(DateNum);
+        configuration.data.datasets[0].data.push(
+          Number(element.me_floor_price)
+        );
+      }
+
+      const dataUrl = await chartJSNodeCanvas.renderToDataURL(configuration);
+      const base64Image = dataUrl;
+
+      var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+
+      fs.writeFileSync(`out.png`, base64Data, "base64", function (err) {
+        if (err) {
+          console.log(err);
+        }
+      });
+
+      const image_file = fs.readFileSync(`out.png`);
+
+      filestack_client
+        .upload(image_file)
+        .then((res) => {
+          bot.telegram.sendPhoto(Myctx.chat.id, res.url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.error(err);
