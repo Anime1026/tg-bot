@@ -90,10 +90,18 @@ const searchCollection_collectionId = (msg) => {
 
       for (let index = 0; index < data.data.events.length; index++) {
         const element = data.data.events[index];
-        const DateNum = new Date(
-          curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
-        ).getDate();
-        configuration.data.labels.push(DateNum + "d");
+
+        const DateNum =
+          String(
+            new Date(
+              curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
+            )
+          ).split(" ")[1] +
+          "-" +
+          new Date(
+            curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
+          ).getDate();
+        configuration.data.labels.push(DateNum);
         configuration.data.datasets[0].data.push(
           Number(element.floorAsk.price)
         );
@@ -211,10 +219,21 @@ const searchCollection_collectionName = async (msg) => {
 
           for (let index = 0; index < data.data.events.length; index++) {
             const element = data.data.events[index];
-            const DateNum = new Date(
-              curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
-            ).getDate();
-            configuration.data.labels.push(DateNum + "d");
+
+            const DateNum =
+              String(
+                new Date(
+                  curDate -
+                    24 * 60 * 60 * 1000 * (data.data.events.length - index)
+                )
+              ).split(" ")[1] +
+              "-" +
+              new Date(
+                curDate -
+                  24 * 60 * 60 * 1000 * (data.data.events.length - index)
+              ).getDate();
+
+            configuration.data.labels.push(DateNum);
             configuration.data.datasets[0].data.push(
               Number(element.floorAsk.price)
             );
@@ -327,8 +346,11 @@ const searchCollection_solCollectionName = async (msg) => {
 
       for (let index = 0; index < data.length - 1; index++) {
         const element = data[index];
-        const DateNum = new Date(element.date).getDate();
-        configuration.data.labels.push(DateNum + "d");
+        const DateNum =
+          String(new Date(element.date)).split(" ")[1] +
+          "-" +
+          new Date(element.date).getDate();
+        configuration.data.labels.push(DateNum);
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
         );
