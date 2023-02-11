@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Telegraf } = require("telegraf");
+const { Telegraf, Markup } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const fs = require("fs");
 const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
@@ -257,9 +257,20 @@ const searchCollection_collectionName = async (msg) => {
                   4
                 )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                   4
-                )}\n🌆 https://opensea.io/collection/${
-                  res2.data.collections[0].slug
-                }\n🏙 https://etherscan.io/token/${res2.data.collections[0].id}`,
+                )}\n${Markup.inlineKeyboard(
+                  [
+                    Markup.button.url(
+                      "Opensea",
+                      `https://opensea.io/collection/${res2.data.collections[0].slug}`
+                    ),
+                    "|",
+                    Markup.button.url(
+                      "Etherscan",
+                      `https://etherscan.io/token/${res2.data.collections[0].id}`
+                    ),
+                  ],
+                  { columns: 1 }
+                )}`,
               });
             })
             .catch((err) => {
