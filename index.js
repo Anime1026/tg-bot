@@ -265,7 +265,9 @@ const searchCollection_collectionName = async (msg) => {
             .upload(image_file)
             .then((res) => {
               bot.telegram
-                .sendPhoto(Myctx.message.chat.id, res.url, "line Graph")
+                .sendPhoto(Myctx.message.chat.id, res.url, {
+                  caption: "Line Graph",
+                })
                 .then(() => {
                   Myctx.telegram.sendMessage(
                     Myctx.message.chat.id,
