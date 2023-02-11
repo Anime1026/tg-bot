@@ -164,6 +164,7 @@ const searchCollection_collectionName = async (msg) => {
           const base64Image = dataUrl;
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
+          console.log(uuid.stringify(), "uuid.stringify()");
 
           fs.writeFile(`${uuid()}.png`, base64Data, "base64", function (err) {
             if (err) {
