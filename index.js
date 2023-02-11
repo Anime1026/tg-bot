@@ -86,13 +86,6 @@ const searchCollection_collectionId = (msg) => {
             },
           ],
         },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 0,
-            },
-          },
-        },
       };
 
       const curDate = new Date().valueOf();
@@ -185,13 +178,6 @@ const searchCollection_collectionName = async (msg) => {
                   xAxisID: "xAxis1",
                 },
               ],
-            },
-            options: {
-              scales: {
-                y: {
-                  suggestedMin: 0,
-                },
-              },
             },
           };
 
