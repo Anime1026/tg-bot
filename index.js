@@ -98,7 +98,7 @@ const searchCollection_collectionId = (msg) => {
         const DateNum = new Date(
           curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
         ).getDate();
-        configuration.data.labels.push(DateNum);
+        configuration.data.labels.push(DateNum + "d");
         configuration.data.datasets[0].data.push(
           Number(element.floorAsk.price)
         );
@@ -191,7 +191,7 @@ const searchCollection_collectionName = async (msg) => {
             const DateNum = new Date(
               curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
             ).getDate();
-            configuration.data.labels.push(DateNum);
+            configuration.data.labels.push(DateNum + "d");
             configuration.data.datasets[0].data.push(
               Number(element.floorAsk.price)
             );
@@ -268,7 +268,7 @@ const searchCollection_solCollectionName = async (msg) => {
       for (let index = 0; index < data.data.length; index++) {
         const element = data.data[index];
         const DateNum = new Date(element.date).getHours();
-        configuration.data.labels.push(DateNum);
+        configuration.data.labels.push(DateNum + "h");
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
         );
