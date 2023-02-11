@@ -9,9 +9,9 @@ const filestack = require("filestack-js");
 const { v4 } = require("uuid");
 // ----------------
 
-const width = 200; //px
-const height = 200; //px
-const backgroundColour = "black"; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
+const width = 600; //px
+const height = 600; //px
+const backgroundColour = "white"; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
 const chartJSNodeCanvas = new ChartJSNodeCanvas({
   width,
   height,
