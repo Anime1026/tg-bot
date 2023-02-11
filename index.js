@@ -166,19 +166,9 @@ const searchCollection_collectionId = (msg) => {
                   ).toFixed(2)
             }%\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
               4
-            )}\n${Markup.inlineKeyboard(
-              [
-                Markup.button.url(
-                  "Opensea",
-                  `https://opensea.io/collection/${res.data.collections[0].slug}`
-                ),
-                Markup.button.url(
-                  "Etherscan",
-                  `https://etherscan.io/token/${res.data.collections[0].id}`
-                ),
-              ],
-              { columns: 2 }
-            )}`,
+            )}\n\n https://opensea.io/collection/${
+              res.data.collections[0].slug
+            }\n https://etherscan.io/token/${res.data.collections[0].id}`,
           });
         })
         .catch((err) => {
