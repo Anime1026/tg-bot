@@ -179,6 +179,7 @@ const searchCollection_collectionName = async (msg) => {
           filestack_client
             .upload(image_file)
             .then((res) => {
+              console.log(res, "res==============");
               console.log(res.url, "res.url");
               bot.telegram.sendPhoto(Myctx.chat.id, res.url);
             })
