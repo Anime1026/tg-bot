@@ -332,7 +332,7 @@ const searchCollection_solCollectionName = async (msg) => {
 
       for (let index = 0; index < data.length - 1; index++) {
         const element = data[index];
-        const DateNum = new Date(element.date).getHours();
+        const DateNum = new Date(element.date).getDate();
         configuration.data.labels.push(DateNum + "d");
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
