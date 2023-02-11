@@ -330,6 +330,12 @@ const searchCollection_solCollectionName = async (msg) => {
       filestack_client
         .upload(image_file)
         .then(async (res) => {
+          console.log(
+            res.url,
+            "res.url==================",
+            "res_sol_collection.data[0].floor_price",
+            res_sol_collection.data[0].floor_price
+          );
           bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
             caption: `\n🌄 ${
               res_sol_collection.data[0].name
