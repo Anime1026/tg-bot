@@ -1,4 +1,3 @@
-const { v4 } = require("uuid");
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
@@ -7,8 +6,7 @@ const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
 const path = require("path");
 const uniqid = require("uniqid");
 const filestack = require("filestack-js");
-
-console.log(v4(), "uuid");
+const { v4 } = require("uuid");
 // ----------------
 
 const width = 400; //px
@@ -166,7 +164,6 @@ const searchCollection_collectionName = async (msg) => {
           const base64Image = dataUrl;
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
-          console.log(v4(), "uuid.stringify()");
 
           fs.writeFile(`${v4()}.png`, base64Data, "base64", function (err) {
             if (err) {
@@ -179,8 +176,6 @@ const searchCollection_collectionName = async (msg) => {
           filestack_client
             .upload(image_file)
             .then((res) => {
-              console.log(res, "res==============");
-              console.log(res.url, "res.url");
               bot.telegram.sendPhoto(Myctx.chat.id, res.url);
             })
             .catch((err) => {
