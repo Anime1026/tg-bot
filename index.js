@@ -138,11 +138,9 @@ const searchCollection_collectionId = (msg) => {
               4
             )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
               4
-            )}\n [OpenSea Link](https://opensea.io/collection/${
+            )}\n🌆 https://opensea.io/collection/${
               res.data.collections[0].slug
-            }) | [Etherscan Link](https://etherscan.io/token/${
-              res.data.collections[0].id
-            })`,
+            }\n🏙 https://etherscan.io/token/${res.data.collections[0].id}`,
           });
         })
         .catch((err) => {
@@ -259,7 +257,9 @@ const searchCollection_collectionName = async (msg) => {
                   4
                 )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                   4
-                )}\n`,
+                )}\n🌆 https://opensea.io/collection/${
+                  res2.data.collections[0].slug
+                }\n🏙 https://etherscan.io/token/${res2.data.collections[0].id}`,
               });
             })
             .catch((err) => {
