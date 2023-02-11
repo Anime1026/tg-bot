@@ -128,9 +128,9 @@ const searchCollection_collectionId = (msg) => {
             .then(() => {
               Myctx.telegram.sendMessage(
                 Myctx.message.chat.id,
-                `🌄 ${res.data.collections[0].name}\n\n📱 Contract Address: ${
+                `🌄 ${res.data.collections[0].name}\n${
                   res.data.collections[0].id
-                }\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
+                }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
                 )}\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
                   4
@@ -268,11 +268,9 @@ const searchCollection_collectionName = async (msg) => {
                 .then(() => {
                   Myctx.telegram.sendMessage(
                     Myctx.message.chat.id,
-                    `🌄 ${
-                      res2.data.collections[0].name
-                    }\n\n📱 Contract Address: ${
+                    `🌄 ${res2.data.collections[0].name}\n${
                       res2.data.collections[0].id
-                    }\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
+                    }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                       4
                     )}\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                       4
