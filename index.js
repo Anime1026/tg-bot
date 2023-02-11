@@ -292,6 +292,19 @@ const searchCollection_solCollectionName = async (msg) => {
   axios
     .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
     .then(async (res) => {
+      await Myctx.telegram.sendMessage(
+        Myctx.message.chat.id,
+        `📜 Name: ${
+          res.data[0].name
+        }\n💸 Floor Price: ${res.data[0].floor_price.toFixed(
+          4
+        )}\n📚 Total Volume: ${res.data[0].me_total_volume.toFixed(
+          4
+        )}\n📦 Total Items: ${res.data[0].total_items.toFixed(
+          4
+        )}\n🖨 Floor Cap: ${res.data[0].floor_cap.toFixed(4)}`,
+        bot.telegram.sendPhoto(Myctx.chat.id, res.url)
+      );
       let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/30/${msg}`;
 
       let data = await axios.get(url);
@@ -341,21 +354,7 @@ const searchCollection_solCollectionName = async (msg) => {
 
       filestack_client
         .upload(image_file)
-        .then(async (res) => {
-          await Myctx.telegram.sendMessage(
-            Myctx.message.chat.id,
-            `📜 Name: ${
-              res.data[0].name
-            }\n💸 Floor Price: ${res.data[0].floor_price.toFixed(
-              4
-            )}\n📚 Total Volume: ${res.data[0].me_total_volume.toFixed(
-              4
-            )}\n📦 Total Items: ${res.data[0].total_items.toFixed(
-              4
-            )}\n🖨 Floor Cap: ${res.data[0].floor_cap.toFixed(4)}`,
-            bot.telegram.sendPhoto(Myctx.chat.id, res.url)
-          );
-        })
+        .then(async (res) => {})
         .catch((err) => {
           console.log(err);
         });
