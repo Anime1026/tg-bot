@@ -268,7 +268,6 @@ const searchCollection_solCollectionName = async (msg) => {
       for (let index = 0; index < data.data.length; index++) {
         const element = data.data[index];
         const DateNum = new Date(element.date).getHours();
-        console.log(element.me_floor_price, DateNum, "123456789");
         configuration.data.labels.push(DateNum);
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
