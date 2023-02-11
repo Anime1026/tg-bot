@@ -123,47 +123,23 @@ const searchCollection_collectionId = (msg) => {
       filestack_client
         .upload(image_file)
         .then((responseImage) => {
-          bot.telegram
-            .sendPhoto(Myctx.message.chat.id, responseImage.url)
-            .then(() => {
-              Myctx.telegram.sendMessage(
-                Myctx.message.chat.id,
-                `🌄 ${res.data.collections[0].name}\n${
-                  res.data.collections[0].id
-                }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
-                  4
-                )} eth\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
-                  "1day"
-                ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
-                  "7day"
-                ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
-                  "30day"
-                ].toFixed(
-                  4
-                )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
-                  4
-                )}\n`
-                // 🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
-                //   "1day"
-                // ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
-                //   "7day"
-                // ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
-                //   "30day"
-                // ].toFixed(
-                //   4
-                // )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
-                //   "1day"
-                // ].toFixed(
-                //   4
-                // )}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
-                //   "7day"
-                // ].toFixed(
-                //   4
-                // )}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
-                //   "30day"
-                // ].toFixed(4)}\n
-              );
-            });
+          bot.telegram.sendPhoto(Myctx.message.chat.id, responseImage.url, {
+            caption: `🌄 ${res.data.collections[0].name}\n${
+              res.data.collections[0].id
+            }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
+              4
+            )} eth\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
+              "1day"
+            ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
+              "7day"
+            ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
+              "30day"
+            ].toFixed(
+              4
+            )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
+              4
+            )}\n`,
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -264,55 +240,23 @@ const searchCollection_collectionName = async (msg) => {
           filestack_client
             .upload(image_file)
             .then((res) => {
-              bot.telegram
-                .sendPhoto(Myctx.message.chat.id, res.url, {
-                  caption: "Line Graph",
-                })
-                .then(() => {
-                  Myctx.telegram.sendMessage(
-                    Myctx.message.chat.id,
-                    `🌄 ${res2.data.collections[0].name}\n${
-                      res2.data.collections[0].id
-                    }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
-                      4
-                    )} eth\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
-                      "1day"
-                    ].toFixed(
-                      4
-                    )}\n🗓 7Day: ${res2.data.collections[0].volumeChange[
-                      "7day"
-                    ].toFixed(
-                      4
-                    )}\n🗓 30Day: ${res2.data.collections[0].volumeChange[
-                      "30day"
-                    ].toFixed(
-                      4
-                    )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
-                      4
-                    )}\n`
-                    // 🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
-                    //   "1day"
-                    // ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSale[
-                    //   "7day"
-                    // ].toFixed(
-                    //   4
-                    // )}\n🗓 30Day: ${res2.data.collections[0].floorSale[
-                    //   "30day"
-                    // ].toFixed(
-                    //   4
-                    // )}\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
-                    //   "1day"
-                    // ].toFixed(
-                    //   4
-                    // )}\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
-                    //   "7day"
-                    // ].toFixed(
-                    //   4
-                    // )}\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
-                    //   "30day"
-                    // ].toFixed(4)}\n
-                  );
-                });
+              bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
+                caption: `🌄 ${res2.data.collections[0].name}\n${
+                  res2.data.collections[0].id
+                }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
+                  4
+                )} eth\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
+                  "1day"
+                ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].volumeChange[
+                  "7day"
+                ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].volumeChange[
+                  "30day"
+                ].toFixed(
+                  4
+                )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
+                  4
+                )}\n`,
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -386,21 +330,18 @@ const searchCollection_solCollectionName = async (msg) => {
       filestack_client
         .upload(image_file)
         .then(async (res) => {
-          bot.telegram.sendPhoto(Myctx.message.chat.id, res.url).then(() => {
-            Myctx.telegram.sendMessage(
-              Myctx.message.chat.id,
-              `🌄 ${
-                res_sol_collection.data[0].name
-              }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
-                4
-              )} sol\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
-                4
-              )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
-                4
-              )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(
-                4
-              )}`
-            );
+          bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
+            caption: `🌄 ${
+              res_sol_collection.data[0].name
+            }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
+              4
+            )} sol\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+              4
+            )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
+              4
+            )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(
+              4
+            )}`,
           });
         })
         .catch((err) => {
