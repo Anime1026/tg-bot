@@ -285,15 +285,45 @@ const searchCollection_collectionName = async (msg) => {
                   res2.data.collections[0].id
                 }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
-                )} eth\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
-                  "1day"
-                ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].volumeChange[
-                  "7day"
-                ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].volumeChange[
-                  "30day"
-                ].toFixed(
-                  4
-                )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
+                )} eth\n📉 Floor Change:\n🗓 1Day: ${
+                  res2.data.collections[0].floorSaleChange["1day"] >= 1
+                    ? "+" +
+                      (
+                        (res2.data.collections[0].floorSaleChange["1day"] - 1) *
+                        100
+                      ).toFixed(2)
+                    : "-" +
+                      (
+                        (1 - res2.data.collections[0].floorSaleChange["1day"]) *
+                        100
+                      ).toFixed(2)
+                }%\n🗓 7Day: ${
+                  res2.data.collections[0].floorSaleChange["7day"] >= 1
+                    ? "+" +
+                      (
+                        (res2.data.collections[0].floorSaleChange["7day"] - 1) *
+                        100
+                      ).toFixed(2)
+                    : "-" +
+                      (
+                        (1 - res2.data.collections[0].floorSaleChange["7day"]) *
+                        100
+                      ).toFixed(2)
+                }%\n🗓 30Day: ${
+                  res2.data.collections[0].floorSaleChange["30day"] >= 1
+                    ? "+" +
+                      (
+                        (res2.data.collections[0].floorSaleChange["30day"] -
+                          1) *
+                        100
+                      ).toFixed(2)
+                    : "-" +
+                      (
+                        (1 -
+                          res2.data.collections[0].floorSaleChange["30day"]) *
+                        100
+                      ).toFixed(2)
+                }%\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                   4
                 )}\n${Markup.inlineKeyboard(
                   [
