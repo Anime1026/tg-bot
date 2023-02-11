@@ -114,8 +114,8 @@ const searchCollection_collectionId = (msg) => {
 
       filestack_client
         .upload(image_file)
-        .then((res) => {
-          bot.telegram.sendPhoto(Myctx.chat.id, res.url).then(() => {
+        .then((responseImage) => {
+          bot.telegram.sendPhoto(Myctx.chat.id, responseImage.url).then(() => {
             Myctx.telegram.sendMessage(
               Myctx.message.chat.id,
               `📜 Name: ${res.data.collections[0].name}\n📱ID: ${
