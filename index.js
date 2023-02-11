@@ -265,7 +265,7 @@ const searchCollection_solCollectionName = async (msg) => {
       configuration.data.datasets[0].data = [];
       configuration.data.labels = [];
 
-      for (let index = 0; index < data.data.length; index++) {
+      for (let index = 0; index < data.data.length - 1; index++) {
         const element = data.data[index];
         const DateNum = new Date(element.date).getHours();
         configuration.data.labels.push(DateNum + "h");
