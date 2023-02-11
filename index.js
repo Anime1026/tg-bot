@@ -381,13 +381,13 @@ const searchCollection_solCollectionName = async (msg) => {
                 res_sol_collection.data[0].name
               }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
                 4
-              )}e\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+              )}\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
                 4
-              )}e\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
+              )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
                 4
-              )}e\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(
+              )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(
                 4
-              )}e`
+              )}`
             );
           });
         })
