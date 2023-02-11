@@ -132,7 +132,7 @@ const searchCollection_collectionId = (msg) => {
                   res.data.collections[0].id
                 }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
-                )}\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
+                )} eth\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
                   4
                 )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
                   "1day"
@@ -272,7 +272,7 @@ const searchCollection_collectionName = async (msg) => {
                       res2.data.collections[0].id
                     }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                       4
-                    )}\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
+                    )} eth\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                       4
                     )}\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
                       "1day"
@@ -389,7 +389,7 @@ const searchCollection_solCollectionName = async (msg) => {
                 res_sol_collection.data[0].name
               }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
                 4
-              )}\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+              )} sol\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
                 4
               )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
                 4
