@@ -126,37 +126,35 @@ const searchCollection_collectionId = (msg) => {
           bot.telegram.sendPhoto(Myctx.chat.id, responseImage.url).then(() => {
             Myctx.telegram.sendMessage(
               Myctx.message.chat.id,
-              `📜 Name: ${res.data.collections[0].name}\n📱ID: ${
+              `🌄 ${res.data.collections[0].name}\n\n📱 Contract Address: ${
                 res.data.collections[0].id
               }\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
                 4
-              )}e\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
+              )}\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
                 4
-              )}e\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
+              )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
                 "1day"
-              ].toFixed(4)}e\n🗓 7Day: ${res.data.collections[0].volumeChange[
+              ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
                 "7day"
-              ].toFixed(4)}e\n🗓 30Day: ${res.data.collections[0].volumeChange[
+              ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
                 "30day"
               ].toFixed(
                 4
-              )}e\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
+              )}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
                 "1day"
-              ].toFixed(4)}e\n🗓 7Day: ${res.data.collections[0].floorSale[
+              ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
                 "7day"
-              ].toFixed(4)}e\n🗓 30Day: ${res.data.collections[0].floorSale[
+              ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
                 "30day"
               ].toFixed(
                 4
-              )}e\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
+              )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
                 "1day"
-              ].toFixed(4)}e\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
+              ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
                 "7day"
-              ].toFixed(
-                4
-              )}e\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
+              ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
                 "30day"
-              ].toFixed(4)}e\n`
+              ].toFixed(4)}\n`
             );
           });
         })
@@ -262,43 +260,45 @@ const searchCollection_collectionName = async (msg) => {
               bot.telegram.sendPhoto(Myctx.chat.id, res.url).then(() => {
                 Myctx.telegram.sendMessage(
                   Myctx.message.chat.id,
-                  `📜 Name: ${res2.data.collections[0].name}\n📱ID: ${
+                  `🌄 ${
+                    res2.data.collections[0].name
+                  }\n\n📱 Contract Address: ${
                     res2.data.collections[0].id
                   }\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                     4
-                  )}e\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
+                  )}\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                     4
-                  )}e\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
+                  )}\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
                     "1day"
                   ].toFixed(
                     4
-                  )}e\n🗓 7Day: ${res2.data.collections[0].volumeChange[
+                  )}\n🗓 7Day: ${res2.data.collections[0].volumeChange[
                     "7day"
                   ].toFixed(
                     4
-                  )}e\n🗓 30Day: ${res2.data.collections[0].volumeChange[
+                  )}\n🗓 30Day: ${res2.data.collections[0].volumeChange[
                     "30day"
                   ].toFixed(
                     4
-                  )}e\n🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
+                  )}\n🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
                     "1day"
-                  ].toFixed(4)}e\n🗓 7Day: ${res2.data.collections[0].floorSale[
+                  ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSale[
                     "7day"
-                  ].toFixed(4)}e\n🗓 30Day: ${res2.data.collections[0].floorSale[
+                  ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].floorSale[
                     "30day"
                   ].toFixed(
                     4
-                  )}e\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
+                  )}\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
                     "1day"
                   ].toFixed(
                     4
-                  )}e\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
+                  )}\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
                     "7day"
                   ].toFixed(
                     4
-                  )}e\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
+                  )}\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
                     "30day"
-                  ].toFixed(4)}e\n`
+                  ].toFixed(4)}\n`
                 );
               });
             })
@@ -377,7 +377,7 @@ const searchCollection_solCollectionName = async (msg) => {
           bot.telegram.sendPhoto(Myctx.chat.id, res.url).then(() => {
             Myctx.telegram.sendMessage(
               Myctx.message.chat.id,
-              `📜 Name: ${
+              `🌄 ${
                 res_sol_collection.data[0].name
               }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
                 4
