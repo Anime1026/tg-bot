@@ -156,11 +156,6 @@ const searchCollection_collectionName = async (msg) => {
             );
           }
 
-          console.log(
-            configuration.data.datasets[0].data,
-            "configuration---====="
-          );
-
           const dataUrl = await chartJSNodeCanvas.renderToDataURL(
             configuration
           );
@@ -174,13 +169,18 @@ const searchCollection_collectionName = async (msg) => {
             name = name + arr[index];
           }
 
-          fs.writeFile(`out.png`, base64Data, "base64", function (err) {
-            if (err) {
-              console.log(err);
+          await fs.writeFile(
+            `${name}.png`,
+            base64Data,
+            "base64",
+            function (err) {
+              if (err) {
+                console.log(err);
+              }
             }
-          });
+          );
 
-          const image_file = fs.readFileSync(`out.png`);
+          const image_file = await fs.readFileSync(`${name}.png`);
 
           filestack_client
             .upload(image_file)
