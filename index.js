@@ -170,7 +170,7 @@ const searchCollection_collectionId = (msg) => {
             ${Markup.inlineKeyboard([
               "opensea",
               `https://opensea.io/collection/${res.data.collections[0].slug}`,
-            ]).extra()}
+            ])}
             \n https://opensea.io/collection/${
               res.data.collections[0].slug
             }\n https://etherscan.io/token/${res.data.collections[0].id}`,
