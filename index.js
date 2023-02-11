@@ -9,7 +9,7 @@ const filestack = require("filestack-js");
 const { v4 } = require("uuid");
 // ----------------
 
-const width = 400; //px
+const width = 800; //px
 const height = 400; //px
 const backgroundColour = "white"; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
 const chartJSNodeCanvas = new ChartJSNodeCanvas({
@@ -112,7 +112,7 @@ const searchCollection_collectionName = async (msg) => {
             `📜 Name: ${res.data.collections[0].name}\n📱ID: ${res.data.collections[0].id}\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange["1day"]}\n🗓 7Day: ${res.data.collections[0].volumeChange["7day"]}\n🗓 30Day: ${res.data.collections[0].volumeChange["30day"]}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSale["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSale["30day"]}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange["1day"]}\n🗓 7Day: ${res.data.collections[0].floorSaleChange["7day"]}\n🗓 30Day: ${res.data.collections[0].floorSaleChange["30day"]}\n`
           );
 
-          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=50`;
+          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=100`;
 
           let data = await axios.get(url);
 
