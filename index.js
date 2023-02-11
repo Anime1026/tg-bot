@@ -1,3 +1,4 @@
+const uuid = require("uuid");
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
@@ -164,13 +165,13 @@ const searchCollection_collectionName = async (msg) => {
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
 
-          fs.writeFile("out.png", base64Data, "base64", function (err) {
+          fs.writeFile(`${uuid()}.png`, base64Data, "base64", function (err) {
             if (err) {
               console.log(err);
             }
           });
 
-          const image_file = fs.readFileSync("out.png");
+          const image_file = fs.readFileSync(`${uuid()}.png`);
 
           filestack_client
             .upload(image_file)
