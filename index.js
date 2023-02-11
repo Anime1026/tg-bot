@@ -165,20 +165,17 @@ const searchCollection_collectionName = async (msg) => {
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
 
-          fs.writeFile(`${v4()}.png`, base64Data, "base64", function (err) {
+          fs.writeFile(`out.png`, base64Data, "base64", function (err) {
             if (err) {
               console.log(err);
             }
           });
 
-          console.log(`${v4()}.png`, "`${v4()}.png`");
-
-          const image_file = fs.readFileSync(`${v4()}.png`);
+          const image_file = fs.readFileSync(`out.png`);
 
           filestack_client
             .upload(image_file)
             .then((res) => {
-              console.log(`${v4()}.png`, "`${v4()}.png`");
               bot.telegram.sendPhoto(Myctx.chat.id, res.url);
             })
             .catch((err) => {
