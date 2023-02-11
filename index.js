@@ -168,10 +168,8 @@ const searchCollection_collectionId = (msg) => {
               4
             )}\n\n
             ${Markup.inlineKeyboard([
-              Markup.button(
-                "opensea",
-                `https://opensea.io/collection/${res.data.collections[0].slug}`
-              ),
+              "opensea",
+              `https://opensea.io/collection/${res.data.collections[0].slug}`,
             ]).extra()}
             \n https://opensea.io/collection/${
               res.data.collections[0].slug
