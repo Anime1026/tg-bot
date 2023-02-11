@@ -325,16 +325,9 @@ const searchCollection_collectionName = async (msg) => {
                       ).toFixed(2)
                 }%\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                   4
-                )}\n${Markup.inlineKeyboard(
-                  Markup.button.url(
-                    "Opensea",
-                    `https://opensea.io/collection/${res2.data.collections[0].slug}`
-                  ),
-                  Markup.button.url(
-                    "Etherscan",
-                    `https://etherscan.io/token/${res2.data.collections[0].id}`
-                  )
-                )}`,
+                )}\n${Markup.inlineKeyboard([
+                  Markup.button.url("Name", "url"),
+                ])}`,
               });
             })
             .catch((err) => {
