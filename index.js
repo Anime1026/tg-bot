@@ -302,9 +302,9 @@ const searchCollection_solCollectionName = async (msg) => {
           4
         )}\n📦 Total Items: ${res.data[0].total_items.toFixed(
           4
-        )}\n🖨 Floor Cap: ${res.data[0].floor_cap.toFixed(4)}`,
-        bot.telegram.sendPhoto(Myctx.chat.id, res.url)
+        )}\n🖨 Floor Cap: ${res.data[0].floor_cap.toFixed(4)}`
       );
+
       let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/30/${msg}`;
 
       let data = await axios.get(url);
@@ -354,7 +354,9 @@ const searchCollection_solCollectionName = async (msg) => {
 
       filestack_client
         .upload(image_file)
-        .then(async (res) => {})
+        .then(async (res) => {
+          bot.telegram.sendPhoto(Myctx.chat.id, res.url);
+        })
         .catch((err) => {
           console.log(err);
         });
