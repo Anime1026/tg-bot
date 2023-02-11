@@ -171,11 +171,14 @@ const searchCollection_collectionName = async (msg) => {
             }
           });
 
+          console.log(`${v4()}.png`, "`${v4()}.png`");
+
           const image_file = fs.readFileSync(`${v4()}.png`);
 
           filestack_client
             .upload(image_file)
             .then((res) => {
+              console.log(`${v4()}.png`, "`${v4()}.png`");
               bot.telegram.sendPhoto(Myctx.chat.id, res.url);
             })
             .catch((err) => {
