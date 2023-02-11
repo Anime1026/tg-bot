@@ -292,9 +292,10 @@ const searchCollection_solCollectionName = async (msg) => {
   axios
     .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
     .then(async (res) => {
-      let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/24/${msg}`;
+      let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/30/${msg}`;
 
       let data = await axios.get(url);
+      data = data.data[1];
 
       let configuration = {
         type: "line",
@@ -316,10 +317,10 @@ const searchCollection_solCollectionName = async (msg) => {
       configuration.data.datasets[0].data = [];
       configuration.data.labels = [];
 
-      for (let index = 0; index < data.data.length - 1; index++) {
-        const element = data.data[index];
+      for (let index = 0; index < data.length - 1; index++) {
+        const element = data[index];
         const DateNum = new Date(element.date).getHours();
-        configuration.data.labels.push(DateNum + "h");
+        configuration.data.labels.push(DateNum + "d");
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
         );
