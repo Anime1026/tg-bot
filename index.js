@@ -132,9 +132,7 @@ const searchCollection_collectionId = (msg) => {
                   res.data.collections[0].id
                 }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
-                )} eth\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
-                  4
-                )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
+                )} eth\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
                   "1day"
                 ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
                   "7day"
@@ -142,25 +140,28 @@ const searchCollection_collectionId = (msg) => {
                   "30day"
                 ].toFixed(
                   4
-                )}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
-                  "1day"
-                ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
-                  "7day"
-                ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
-                  "30day"
-                ].toFixed(
+                )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
                   4
-                )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
-                  "1day"
-                ].toFixed(
-                  4
-                )}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
-                  "7day"
-                ].toFixed(
-                  4
-                )}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
-                  "30day"
-                ].toFixed(4)}\n`
+                )}\n`
+                // 🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
+                //   "1day"
+                // ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
+                //   "7day"
+                // ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
+                //   "30day"
+                // ].toFixed(
+                //   4
+                // )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
+                //   "1day"
+                // ].toFixed(
+                //   4
+                // )}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
+                //   "7day"
+                // ].toFixed(
+                //   4
+                // )}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
+                //   "30day"
+                // ].toFixed(4)}\n
               );
             });
         })
@@ -272,9 +273,7 @@ const searchCollection_collectionName = async (msg) => {
                       res2.data.collections[0].id
                     }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                       4
-                    )} eth\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
-                      4
-                    )}\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
+                    )} eth\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
                       "1day"
                     ].toFixed(
                       4
@@ -286,27 +285,30 @@ const searchCollection_collectionName = async (msg) => {
                       "30day"
                     ].toFixed(
                       4
-                    )}\n🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
-                      "1day"
-                    ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSale[
-                      "7day"
-                    ].toFixed(
+                    )}\n📊 Total Volume: ${res2.data.collections[0].volume.allTime.toFixed(
                       4
-                    )}\n🗓 30Day: ${res2.data.collections[0].floorSale[
-                      "30day"
-                    ].toFixed(
-                      4
-                    )}\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
-                      "1day"
-                    ].toFixed(
-                      4
-                    )}\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
-                      "7day"
-                    ].toFixed(
-                      4
-                    )}\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
-                      "30day"
-                    ].toFixed(4)}\n`
+                    )}\n`
+                    // 🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
+                    //   "1day"
+                    // ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSale[
+                    //   "7day"
+                    // ].toFixed(
+                    //   4
+                    // )}\n🗓 30Day: ${res2.data.collections[0].floorSale[
+                    //   "30day"
+                    // ].toFixed(
+                    //   4
+                    // )}\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
+                    //   "1day"
+                    // ].toFixed(
+                    //   4
+                    // )}\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
+                    //   "7day"
+                    // ].toFixed(
+                    //   4
+                    // )}\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
+                    //   "30day"
+                    // ].toFixed(4)}\n
                   );
                 });
             })
