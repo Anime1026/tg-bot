@@ -128,15 +128,43 @@ const searchCollection_collectionId = (msg) => {
               res.data.collections[0].id
             }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
               4
-            )} eth\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
-              "1day"
-            ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
-              "7day"
-            ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
-              "30day"
-            ].toFixed(
-              4
-            )}\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
+            )} eth\n📉 Floor Change:\n🗓 1Day: ${
+              res.data.collections[0].floorSaleChange["1day"] >= 1
+                ? "+" +
+                  (
+                    (res.data.collections[0].floorSaleChange["1day"] - 1) *
+                    100
+                  ).toFixed()
+                : "-" +
+                  (
+                    (1 - res.data.collections[0].floorSaleChange["1day"]) *
+                    100
+                  ).toFixed()
+            }%\n🗓 7Day: ${
+              res.data.collections[0].floorSaleChange["7day"] >= 1
+                ? "+" +
+                  (
+                    (res.data.collections[0].floorSaleChange["7day"] - 1) *
+                    100
+                  ).toFixed()
+                : "-" +
+                  (
+                    (1 - res.data.collections[0].floorSaleChange["7day"]) *
+                    100
+                  ).toFixed()
+            }%\n🗓 30Day: ${
+              res.data.collections[0].floorSaleChange["30day"] >= 1
+                ? "+" +
+                  (
+                    (res.data.collections[0].floorSaleChange["30day"] - 1) *
+                    100
+                  ).toFixed()
+                : "-" +
+                  (
+                    (1 - res.data.collections[0].floorSaleChange["30day"]) *
+                    100
+                  ).toFixed()
+            }%\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
               4
             )}\n🌆 https://opensea.io/collection/${
               res.data.collections[0].slug
