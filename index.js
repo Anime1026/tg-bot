@@ -124,7 +124,7 @@ const searchCollection_collectionId = (msg) => {
         .upload(image_file)
         .then((responseImage) => {
           bot.telegram.sendPhoto(Myctx.message.chat.id, responseImage.url, {
-            caption: `🌄 ${res.data.collections[0].name}\n${
+            caption: `\n🌄 ${res.data.collections[0].name}\n${
               res.data.collections[0].id
             }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
               4
@@ -241,7 +241,7 @@ const searchCollection_collectionName = async (msg) => {
             .upload(image_file)
             .then((res) => {
               bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
-                caption: `🌄 ${res2.data.collections[0].name}\n${
+                caption: `\n🌄 ${res2.data.collections[0].name}\n${
                   res2.data.collections[0].id
                 }\n\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
@@ -331,7 +331,7 @@ const searchCollection_solCollectionName = async (msg) => {
         .upload(image_file)
         .then(async (res) => {
           bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
-            caption: `🌄 ${
+            caption: `\n🌄 ${
               res_sol_collection.data[0].name
             }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
               4
