@@ -62,39 +62,6 @@ const searchCollection_collectionId = (msg) => {
   axios
     .request(options2)
     .then(async (res) => {
-      await Myctx.telegram.sendMessage(
-        Myctx.message.chat.id,
-        `📜 Name: ${res.data.collections[0].name}\n📱ID: ${
-          res.data.collections[0].id
-        }\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
-          4
-        )}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
-          4
-        )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
-          "1day"
-        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
-          "7day"
-        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
-          "30day"
-        ].toFixed(
-          4
-        )}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
-          "1day"
-        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
-          "7day"
-        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
-          "30day"
-        ].toFixed(
-          4
-        )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
-          "1day"
-        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
-          "7day"
-        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
-          "30day"
-        ].toFixed(4)}\n`
-      );
-
       let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit=31`;
 
       let data = await axios.get(url);
@@ -153,6 +120,38 @@ const searchCollection_collectionId = (msg) => {
         .catch((err) => {
           console.log(err);
         });
+      await Myctx.telegram.sendMessage(
+        Myctx.message.chat.id,
+        `📜 Name: ${res.data.collections[0].name}\n📱ID: ${
+          res.data.collections[0].id
+        }\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
+          4
+        )}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
+          4
+        )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
+          "1day"
+        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
+          "7day"
+        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
+          "30day"
+        ].toFixed(
+          4
+        )}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
+          "1day"
+        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
+          "7day"
+        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
+          "30day"
+        ].toFixed(
+          4
+        )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
+          "1day"
+        ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
+          "7day"
+        ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
+          "30day"
+        ].toFixed(4)}\n`
+      );
     })
     .catch((err) => {
       console.error(err);
@@ -182,40 +181,7 @@ const searchCollection_collectionName = async (msg) => {
 
       axios
         .request(options2)
-        .then(async (res) => {
-          await Myctx.telegram.sendMessage(
-            Myctx.message.chat.id,
-            `📜 Name: ${res.data.collections[0].name}\n📱ID: ${
-              res.data.collections[0].id
-            }\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
-              4
-            )}ETH\n📊 Volume: ${res.data.collections[0].volume.allTime.toFixed(
-              4
-            )}\n📉 Volume Change:\n🗓 1Day: ${res.data.collections[0].volumeChange[
-              "1day"
-            ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].volumeChange[
-              "7day"
-            ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].volumeChange[
-              "30day"
-            ].toFixed(
-              4
-            )}\n🛍 FloorSale:\n🗓 1Day: ${res.data.collections[0].floorSale[
-              "1day"
-            ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSale[
-              "7day"
-            ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSale[
-              "30day"
-            ].toFixed(
-              4
-            )}\n🛒 FloorSale Change:\n🗓 1Day: ${res.data.collections[0].floorSaleChange[
-              "1day"
-            ].toFixed(4)}\n🗓 7Day: ${res.data.collections[0].floorSaleChange[
-              "7day"
-            ].toFixed(4)}\n🗓 30Day: ${res.data.collections[0].floorSaleChange[
-              "30day"
-            ].toFixed(4)}\n`
-          );
-
+        .then(async (res2) => {
           let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=31`;
 
           let data = await axios.get(url);
@@ -276,6 +242,39 @@ const searchCollection_collectionName = async (msg) => {
             .catch((err) => {
               console.log(err);
             });
+
+          await Myctx.telegram.sendMessage(
+            Myctx.message.chat.id,
+            `📜 Name: ${res2.data.collections[0].name}\n📱ID: ${
+              res2.data.collections[0].id
+            }\n💰 Price: ${res2.data.collections[0].floorAsk.price.amount.native.toFixed(
+              4
+            )}ETH\n📊 Volume: ${res2.data.collections[0].volume.allTime.toFixed(
+              4
+            )}\n📉 Volume Change:\n🗓 1Day: ${res2.data.collections[0].volumeChange[
+              "1day"
+            ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].volumeChange[
+              "7day"
+            ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].volumeChange[
+              "30day"
+            ].toFixed(
+              4
+            )}\n🛍 FloorSale:\n🗓 1Day: ${res2.data.collections[0].floorSale[
+              "1day"
+            ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSale[
+              "7day"
+            ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].floorSale[
+              "30day"
+            ].toFixed(
+              4
+            )}\n🛒 FloorSale Change:\n🗓 1Day: ${res2.data.collections[0].floorSaleChange[
+              "1day"
+            ].toFixed(4)}\n🗓 7Day: ${res2.data.collections[0].floorSaleChange[
+              "7day"
+            ].toFixed(4)}\n🗓 30Day: ${res2.data.collections[0].floorSaleChange[
+              "30day"
+            ].toFixed(4)}\n`
+          );
         })
         .catch((err) => {
           console.error(err);
@@ -291,20 +290,7 @@ const searchCollection_collectionName = async (msg) => {
 const searchCollection_solCollectionName = async (msg) => {
   axios
     .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
-    .then(async (res) => {
-      await Myctx.telegram.sendMessage(
-        Myctx.message.chat.id,
-        `📜 Name: ${
-          res.data[0].name
-        }\n💸 Floor Price: ${res.data[0].floor_price.toFixed(
-          4
-        )}\n📚 Total Volume: ${res.data[0].me_total_volume.toFixed(
-          4
-        )}\n📦 Total Items: ${res.data[0].total_items.toFixed(
-          4
-        )}\n🖨 Floor Cap: ${res.data[0].floor_cap.toFixed(4)}`
-      );
-
+    .then(async (res_sol_collection) => {
       let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/30/${msg}`;
 
       let data = await axios.get(url);
@@ -360,6 +346,19 @@ const searchCollection_solCollectionName = async (msg) => {
         .catch((err) => {
           console.log(err);
         });
+
+      await Myctx.telegram.sendMessage(
+        Myctx.message.chat.id,
+        `📜 Name: ${
+          res_sol_collection.data[0].name
+        }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
+          4
+        )}\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+          4
+        )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
+          4
+        )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(4)}`
+      );
     })
     .catch((err) => {
       console.error(err);
