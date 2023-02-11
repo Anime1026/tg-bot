@@ -124,7 +124,7 @@ const searchCollection_collectionId = (msg) => {
         .upload(image_file)
         .then((responseImage) => {
           bot.telegram.sendPhoto(Myctx.message.chat.id, responseImage.url, {
-            caption: `\n🌄 ${res.data.collections[0].name}\n${
+            caption: `\n🌄 <i>${res.data.collections[0].name}</i>\n${
               res.data.collections[0].id
             }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
               4
