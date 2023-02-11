@@ -142,6 +142,9 @@ const searchCollection_collectionName = async (msg) => {
 
           const curDate = new Date().valueOf();
 
+          configuration.data.datasets[0].data = [];
+          configuration.data.labels = [];
+
           for (let index = 0; index < data.data.events.length; index++) {
             const element = data.data.events[index];
             const DateNum = new Date(
