@@ -172,14 +172,8 @@ const searchCollection_collectionId = (msg) => {
                   ).toFixed(2)
             }%\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
               4
-            )}\n\n
-            ${Markup.inlineKeyboard([
-              "opensea",
-              `https://opensea.io/collection/${res.data.collections[0].slug}`,
-            ])}
-            \n https://opensea.io/collection/${
-              res.data.collections[0].slug
-            }\n https://etherscan.io/token/${res.data.collections[0].id}`,
+            )}\n\n https://opensea.io/collection/${res.data.collections[0].slug}
+            \n https://etherscan.io/token/${res.data.collections[0].id}`,
           });
         })
         .catch((err) => {
