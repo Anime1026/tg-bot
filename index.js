@@ -342,23 +342,22 @@ const searchCollection_solCollectionName = async (msg) => {
         .upload(image_file)
         .then(async (res) => {
           bot.telegram.sendPhoto(Myctx.chat.id, res.url);
+          await Myctx.telegram.sendMessage(
+            Myctx.message.chat.id,
+            `📜 Name: ${
+              res_sol_collection.data[0].name
+            }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
+              4
+            )}\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+              4
+            )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
+              4
+            )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(4)}`
+          );
         })
         .catch((err) => {
           console.log(err);
         });
-
-      await Myctx.telegram.sendMessage(
-        Myctx.message.chat.id,
-        `📜 Name: ${
-          res_sol_collection.data[0].name
-        }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
-          4
-        )}\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
-          4
-        )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
-          4
-        )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(4)}`
-      );
     })
     .catch((err) => {
       console.error(err);
