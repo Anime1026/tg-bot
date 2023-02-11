@@ -1,4 +1,4 @@
-const uuid = require("uuid");
+const { v4 } = require("uuid");
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
@@ -7,6 +7,8 @@ const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
 const path = require("path");
 const uniqid = require("uniqid");
 const filestack = require("filestack-js");
+
+console.log(v4(), "uuid");
 // ----------------
 
 const width = 400; //px
@@ -164,15 +166,15 @@ const searchCollection_collectionName = async (msg) => {
           const base64Image = dataUrl;
 
           var base64Data = base64Image.replace(/^data:image\/png;base64,/, "");
-          console.log(uuid.stringify(), "uuid.stringify()");
+          console.log(v4(), "uuid.stringify()");
 
-          fs.writeFile(`${uuid()}.png`, base64Data, "base64", function (err) {
+          fs.writeFile(`${v4()}.png`, base64Data, "base64", function (err) {
             if (err) {
               console.log(err);
             }
           });
 
-          const image_file = fs.readFileSync(`${uuid()}.png`);
+          const image_file = fs.readFileSync(`${v4()}.png`);
 
           filestack_client
             .upload(image_file)
