@@ -171,13 +171,13 @@ const searchCollection_collectionName = async (msg) => {
             name = name + arr[index];
           }
 
-          fs.writeFile(`${name}.png`, base64Data, "base64", function (err) {
+          fs.writeFile(`out.png`, base64Data, "base64", function (err) {
             if (err) {
               console.log(err);
             }
           });
 
-          const image_file = fs.readFileSync(`${name}.png`);
+          const image_file = fs.readFileSync(`out.png`);
 
           filestack_client
             .upload(image_file)
