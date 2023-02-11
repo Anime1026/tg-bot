@@ -119,7 +119,13 @@ const searchCollection_collectionId = (msg) => {
       });
 
       const image_file = fs.readFileSync(`out.png`);
-
+      console.log(
+        Markup.inlineKeyboard([
+          "opensea",
+          `https://opensea.io/collection/${res.data.collections[0].slug}`,
+        ]),
+        "435678"
+      );
       filestack_client
         .upload(image_file)
         .then((responseImage) => {
