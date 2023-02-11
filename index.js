@@ -263,13 +263,12 @@ const searchCollection_collectionName = async (msg) => {
                       "Opensea",
                       `https://opensea.io/collection/${res2.data.collections[0].slug}`
                     ),
-                    "|",
                     Markup.button.url(
                       "Etherscan",
                       `https://etherscan.io/token/${res2.data.collections[0].id}`
                     ),
                   ],
-                  { columns: 1 }
+                  { columns: 2 }
                 )}`,
               });
             })
