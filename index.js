@@ -215,8 +215,6 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           let data = await axios.get(url);
 
-          console.log("data=================", data);
-
           let configuration = {
             type: "line",
             data: {
@@ -336,6 +334,8 @@ const searchCollection_collectionName = async (ctx, msg) => {
               captionText = captionText.replace(/\./g, "\\.");
               captionText = captionText.replace(/\+/g, "\\+");
               captionText = captionText.replace(/\-/g, "\\-");
+
+              console.log(captionText, "captionText-----------", res.url);
 
               ctx
                 .replyWithPhoto(res.url, {
