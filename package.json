@@ -21,6 +21,7 @@
     "filestack-js": "^3.25.0",
     "http": "^0.0.1-security",
     "jimp": "^0.22.4",
+    "markdown-escape": "^2.0.0",
     "node-fetch": "^3.3.0",
     "pexels": "^1.4.0",
     "telegraf": "^4.11.2",
