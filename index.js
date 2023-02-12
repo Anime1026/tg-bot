@@ -302,9 +302,21 @@ const searchCollection_collectionName = async (ctx, msg) => {
               captionText = captionText.replace(/\+/g, '\\+');
               captionText = captionText.replace(/\-/g, '\\-');
 
+
               ctx.replyWithPhoto(res.url, {
                 caption: captionText,
-                parse_mode: 'MarkdownV2'
+                parse_mode: 'MarkdownV2',
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: "▫️ advertiser ▫️",
+                        url: "https://t.me/EthereumBitcoinNews",
+                      },
+                    ],
+                  ],
+                },
+
               }).then((r) => {
                 console.log(r)
               });
