@@ -297,7 +297,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`
 
 
-              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n\n🔗 Collection Links:\n🌐 [Opensea](${collectionOpenseaUrl})\n🌐 [Etherscan](${collectionEtherscanUrl})`
+              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`
               captionText = captionText.replace(/\./g, '\\.');
               captionText = captionText.replace(/\+/g, '\\+');
               captionText = captionText.replace(/\-/g, '\\-');
