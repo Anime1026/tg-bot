@@ -7,7 +7,6 @@ const path = require("path");
 const uniqid = require("uniqid");
 const filestack = require("filestack-js");
 const { v4 } = require("uuid");
-const { italic } = require("telegraf/typings/format");
 // ----------------
 
 const width = 600; //px
@@ -131,9 +130,9 @@ const searchCollection_collectionId = (msg) => {
         .upload(image_file)
         .then((responseImage) => {
           bot.telegram.sendPhoto(Myctx.message.chat.id, responseImage.url, {
-            caption: `\n🌄 ${italic(res.data.collections[0].name)}\n${italic(
+            caption: `\n🌄 <i>${res.data.collections[0].name}</i>\n${
               res.data.collections[0].id
-            )}\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
+            }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
               4
             )} eth\n📉 Floor Change:\n🗓 1Day: ${
               res.data.collections[0].floorSaleChange["1day"] >= 1
