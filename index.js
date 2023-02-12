@@ -58,12 +58,8 @@ const searchCollection_collectionId = (ctx, key) => {
   axios
     .request(options2)
     .then(async (res2) => {
-      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=31`;
-
+      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit=31`;
       let data = await axios.get(url);
-
-      console.log("data=================", data);
-
       let configuration = {
         type: "line",
         data: {
