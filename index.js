@@ -215,6 +215,8 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           let data = await axios.get(url);
 
+          console.log("data=================", data);
+
           let configuration = {
             type: "line",
             data: {
