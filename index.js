@@ -3,12 +3,7 @@ const { Telegraf, Markup } = require("telegraf");
 const dotenv = require("dotenv"); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const fs = require("fs");
 const { ChartJSNodeCanvas } = require("chartjs-node-canvas");
-const path = require("path");
-const uniqid = require("uniqid");
 const filestack = require("filestack-js");
-const { v4 } = require("uuid");
-var escape = require("markdown-escape");
-// ----------------
 
 const width = 600; //px
 const height = 600; //px
@@ -48,8 +43,8 @@ const InputCallBack = (ctx) => {
   }
 };
 
-const searchCollection_collectionId = (msg) => {
-  const id = msg;
+const searchCollection_collectionId = (ctx, key) => {
+  const id = key;
 
   const options2 = {
     method: "GET",
@@ -62,10 +57,12 @@ const searchCollection_collectionId = (msg) => {
 
   axios
     .request(options2)
-    .then(async (res) => {
-      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit=31`;
+    .then(async (res2) => {
+      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=31`;
 
       let data = await axios.get(url);
+
+      console.log("data=================", data);
 
       let configuration = {
         type: "line",
@@ -102,6 +99,7 @@ const searchCollection_collectionId = (msg) => {
           new Date(
             curDate - 24 * 60 * 60 * 1000 * (data.data.events.length - index)
           ).getDate();
+
         configuration.data.labels.push(DateNum);
         configuration.data.datasets[0].data.push(
           Number(element.floorAsk.price)
@@ -120,63 +118,85 @@ const searchCollection_collectionId = (msg) => {
       });
 
       const image_file = fs.readFileSync(`out.png`);
-      console.log(
-        Markup.inlineKeyboard([
-          "opensea",
-          `https://opensea.io/collection/${res.data.collections[0].slug}`,
-        ]),
-        "435678"
-      );
+
       filestack_client
         .upload(image_file)
-        .then((responseImage) => {
-          bot.telegram.sendPhoto(Myctx.message.chat.id, responseImage.url, {
-            parse_mode: "MarkdownV2",
-            caption: `\n🌄 <i>${res.data.collections[0].name}</i>\n${
-              res.data.collections[0].id
-            }\n\n💰 Price: ${res.data.collections[0].floorAsk.price.amount.native.toFixed(
-              4
-            )} eth\n📉 Floor Change:\n🗓 1Day: ${
-              res.data.collections[0].floorSaleChange["1day"] >= 1
-                ? "+" +
-                  (
-                    (res.data.collections[0].floorSaleChange["1day"] - 1) *
-                    100
-                  ).toFixed(2)
-                : "-" +
-                  (
-                    (1 - res.data.collections[0].floorSaleChange["1day"]) *
-                    100
-                  ).toFixed(2)
-            }%\n🗓 7Day: ${
-              res.data.collections[0].floorSaleChange["7day"] >= 1
-                ? "+" +
-                  (
-                    (res.data.collections[0].floorSaleChange["7day"] - 1) *
-                    100
-                  ).toFixed(2)
-                : "-" +
-                  (
-                    (1 - res.data.collections[0].floorSaleChange["7day"]) *
-                    100
-                  ).toFixed(2)
-            }%\n🗓 30Day: ${
-              res.data.collections[0].floorSaleChange["30day"] >= 1
-                ? "+" +
-                  (
-                    (res.data.collections[0].floorSaleChange["30day"] - 1) *
-                    100
-                  ).toFixed(2)
-                : "-" +
-                  (
-                    (1 - res.data.collections[0].floorSaleChange["30day"]) *
-                    100
-                  ).toFixed(2)
-            }%\n📊 Total Volume: ${res.data.collections[0].volume.allTime.toFixed(
-              4
-            )}\n\n https://opensea.io/collection/${res.data.collections[0].slug}
-            \n https://etherscan.io/token/${res.data.collections[0].id}`,
-          });
+        .then((res) => {
+          const price =
+            res2.data.collections[0].floorAsk.price.amount.native.toFixed(4);
+          const floorChange1day =
+            res2.data.collections[0].floorSaleChange["1day"] >= 1
+              ? "+" +
+                (
+                  (res2.data.collections[0].floorSaleChange["1day"] - 1) *
+                  100
+                ).toFixed(2)
+              : "-" +
+                (
+                  (1 - res2.data.collections[0].floorSaleChange["1day"]) *
+                  100
+                ).toFixed(2);
+
+          const floorChange7day =
+            res2.data.collections[0].floorSaleChange["7day"] >= 1
+              ? "+" +
+                (
+                  (res2.data.collections[0].floorSaleChange["7day"] - 1) *
+                  100
+                ).toFixed(2)
+              : "-" +
+                (
+                  (1 - res2.data.collections[0].floorSaleChange["7day"]) *
+                  100
+                ).toFixed(2);
+
+          const floorChange30day =
+            res2.data.collections[0].floorSaleChange["30day"] >= 1
+              ? "+" +
+                (
+                  (res2.data.collections[0].floorSaleChange["30day"] - 1) *
+                  100
+                ).toFixed(2)
+              : "-" +
+                (
+                  (1 - res2.data.collections[0].floorSaleChange["30day"]) *
+                  100
+                ).toFixed(2);
+
+          const totalVolume =
+            res2.data.collections[0].volume.allTime.toFixed(4);
+
+          const collectionId = res2.data.collections[0].id;
+          const collectionName = res2.data.collections[0].name;
+          const collectionSlug = res2.data.collections[0].slug;
+
+          const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
+          const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
+
+          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
+          captionText = captionText.replace(/\./g, "\\.");
+          captionText = captionText.replace(/\+/g, "\\+");
+          captionText = captionText.replace(/\-/g, "\\-");
+          captionText = captionText.replace(/\|/g, "\\|");
+
+          ctx
+            .replyWithPhoto(res.url, {
+              caption: captionText,
+              parse_mode: "MarkdownV2",
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: "▫️ advertiser ▫️",
+                      url: "https://t.me/EthereumBitcoinNews",
+                    },
+                  ],
+                ],
+              },
+            })
+            .then((r) => {
+              console.log(r);
+            });
         })
         .catch((err) => {
           console.log(err);
