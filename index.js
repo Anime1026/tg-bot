@@ -183,7 +183,7 @@ const searchCollection_collectionId = (ctx, key) => {
           const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
           const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holder: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
+          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holders: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
             2
           )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
           captionText = captionText.replace(/\./g, "\\.");
@@ -376,7 +376,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
               const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holder: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
+              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holders: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
                 2
               )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
               captionText = captionText.replace(/\./g, "\\.");
