@@ -162,6 +162,11 @@ const searchCollection_collectionId = (ctx, key) => {
           const totalVolume =
             res2.data.collections[0].volume.allTime.toFixed(4);
 
+          const listed =
+            (Number(res2.data.collections[0].onSaleCount) /
+              Number(res2.data.collections[0].tokenCount)) *
+            100;
+
           const collectionId = res2.data.collections[0].id;
           const collectionName = res2.data.collections[0].name;
           const collectionSlug = res2.data.collections[0].slug;
@@ -169,7 +174,9 @@ const searchCollection_collectionId = (ctx, key) => {
           const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
           const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
+          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Listed: ${listed.toFixed(
+            2
+          )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
           captionText = captionText.replace(/\./g, "\\.");
           captionText = captionText.replace(/\+/g, "\\+");
           captionText = captionText.replace(/\-/g, "\\-");
@@ -339,6 +346,11 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const totalVolume =
                 res2.data.collections[0].volume.allTime.toFixed(4);
 
+              const listed =
+                (Number(res2.data.collections[0].onSaleCount) /
+                  Number(res2.data.collections[0].tokenCount)) *
+                100;
+
               const collectionId = res2.data.collections[0].id;
               const collectionName = res2.data.collections[0].name;
               const collectionSlug = res2.data.collections[0].slug;
@@ -346,7 +358,9 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
               const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
+              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Listed: ${listed.toFixed(
+                2
+              )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
               captionText = captionText.replace(/\./g, "\\.");
               captionText = captionText.replace(/\+/g, "\\+");
               captionText = captionText.replace(/\-/g, "\\-");
