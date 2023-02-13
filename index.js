@@ -351,6 +351,21 @@ const searchCollection_collectionName = async (ctx, msg) => {
                   Number(res2.data.collections[0].tokenCount)) *
                 100;
 
+              const options_owner = {
+                method: "GET",
+                headers: { "X-API-KEY": "abb98582ec0343268a2fd47cfdf46036" },
+              };
+
+              let owner_data = fetch(
+                "https://api.opensea.io/api/v1/collection/mutant-ape-yacht-club",
+                options_owner
+              );
+
+              console.log(
+                owner_data.data.collection.stats.num_owners,
+                "owners==========="
+              );
+
               const collectionId = res2.data.collections[0].id;
               const collectionName = res2.data.collections[0].name;
               const collectionSlug = res2.data.collections[0].slug;
