@@ -475,23 +475,48 @@ const searchCollection_solCollectionName = async (msg) => {
       filestack_client
         .upload(image_file)
         .then(async (res) => {
-          bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
-            caption: `\n🌄 _${
-              res_sol_collection.data[0].name
-            }_\n💸 *Floor Price*: ${res_sol_collection.data[0].floor_price.toFixed(
-              4
-            )} sol\n💸 *Floor Change*:\n💸 *1Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
-              2
-            )} %\n💸 *7Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
-              2
-            )} %\n💸 *30Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
-              2
-            )} %\n📚 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
-              4
-            )}\n💎 *Total Supply*: ${
-              res_sol_collection.data[0].total_items
-            }\n💎 *Listed*: ${res_sol_collection.data[0].me_listed_count}`,
-          });
+          let captionText = `\n🌄 _${
+            res_sol_collection.data[0].name
+          }_\n\n⚡️ *Network: Solana*\n\n💰 *Price*: ${res_sol_collection.data[0].floor_price.toFixed(
+            4
+          )} sol\n📉 *Floor Change*:\n🗓 *1 Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
+            2
+          )}%\n🗓 *7 Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
+            2
+          )}%\n🗓 *30 Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
+            2
+          )}%\n📈 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
+            4
+          )} sol\n💎 *Total Supply*: ${
+            res_sol_collection.data[0].total_items
+          }\n💎 *Listed*: ${
+            res_sol_collection.data[0].me_listed_count
+          } %\n\n🔗 Collection Links:\n[MagicEden](https://magiceden.io/marketplace/${
+            res_sol_collection.data[0].magiceden
+          })`;
+          captionText = captionText.replace(/\./g, "\\.");
+          captionText = captionText.replace(/\+/g, "\\+");
+          captionText = captionText.replace(/\-/g, "\\-");
+          captionText = captionText.replace(/\|/g, "\\|");
+
+          ctx
+            .replyWithPhoto(res.url, {
+              caption: captionText,
+              parse_mode: "MarkdownV2",
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: "▫️ advertiser ▫️",
+                      url: "https://t.me/solana_price_bot",
+                    },
+                  ],
+                ],
+              },
+            })
+            .then((r) => {
+              console.log(r);
+            });
         })
         .catch((err) => {
           console.log(err);
