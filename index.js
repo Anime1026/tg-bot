@@ -476,17 +476,21 @@ const searchCollection_solCollectionName = async (msg) => {
         .upload(image_file)
         .then(async (res) => {
           bot.telegram.sendPhoto(Myctx.message.chat.id, res.url, {
-            caption: `\n🌄 ${
+            caption: `\n🌄 _${
               res_sol_collection.data[0].name
-            }\n💸 Floor Price: ${res_sol_collection.data[0].floor_price.toFixed(
+            }_\n💸 *Floor Price*: ${res_sol_collection.data[0].floor_price.toFixed(
               4
-            )} sol\n📚 Total Volume: ${res_sol_collection.data[0].me_total_volume.toFixed(
+            )} sol\n💸 *Floor Change*:\n💸 *1Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
+              2
+            )} %\n💸 *7Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
+              2
+            )} %\n💸 *30Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
+              2
+            )} %\n📚 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
               4
-            )}\n📦 Total Items: ${res_sol_collection.data[0].total_items.toFixed(
-              4
-            )}\n🖨 Floor Cap: ${res_sol_collection.data[0].floor_cap.toFixed(
-              4
-            )}`,
+            )}\n💎 *Total Supply*: ${
+              res_sol_collection.data[0].total_items
+            }\n💎 *Listed*: ${res_sol_collection.data[0].me_listed_count}`,
           });
         })
         .catch((err) => {
@@ -516,5 +520,14 @@ bot.on("message", async (ctx) => {
 
   InputCallBack(ctx);
 });
+
+const test = async () => {
+  let data = await axios.get(
+    "https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=y00ts"
+  );
+  console.log(data.data, "data");
+};
+
+test();
 
 bot.launch();
