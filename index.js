@@ -117,7 +117,7 @@ const searchCollection_collectionId = (ctx, key) => {
 
       filestack_client
         .upload(image_file)
-        .then((res) => {
+        .then(async (res) => {
           const price =
             res2.data.collections[0].floorAsk.price.amount.native.toFixed(4);
           const floorChange1day =
@@ -167,6 +167,15 @@ const searchCollection_collectionId = (ctx, key) => {
               Number(res2.data.collections[0].tokenCount)) *
             100;
 
+          const options_owner = {
+            method: "GET",
+            headers: { "X-API-KEY": "abb98582ec0343268a2fd47cfdf46036" },
+            url: `https://api.opensea.io/api/v1/collection/${res2.data.collections[0].slug}`,
+          };
+
+          let owner_data = await axios.request(options_owner);
+          const uniqueHolder = owner_data.data.collection.stats.num_owners;
+
           const collectionId = res2.data.collections[0].id;
           const collectionName = res2.data.collections[0].name;
           const collectionSlug = res2.data.collections[0].slug;
@@ -174,7 +183,7 @@ const searchCollection_collectionId = (ctx, key) => {
           const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
           const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Listed: ${listed.toFixed(
+          let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holder: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
             2
           )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
           captionText = captionText.replace(/\./g, "\\.");
@@ -354,15 +363,11 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const options_owner = {
                 method: "GET",
                 headers: { "X-API-KEY": "abb98582ec0343268a2fd47cfdf46036" },
-                url: "https://api.opensea.io/api/v1/collection/mutant-ape-yacht-club",
+                url: `https://api.opensea.io/api/v1/collection/${res2.data.collections[0].slug}`,
               };
 
               let owner_data = await axios.request(options_owner);
-
-              console.log(
-                owner_data.data.collection.stats.num_owners,
-                "owners==========="
-              );
+              const uniqueHolder = owner_data.data.collection.stats.num_owners;
 
               const collectionId = res2.data.collections[0].id;
               const collectionName = res2.data.collections[0].name;
@@ -371,7 +376,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const collectionOpenseaUrl = `https://opensea.io/collection/${collectionSlug}`;
               const collectionEtherscanUrl = `https://etherscan.io/token/${collectionId}`;
 
-              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Listed: ${listed.toFixed(
+              let captionText = `\n🌄 ${collectionName}\n${collectionId}\n\n⚡️ Network: ETHEREUM\n\n💰 Price: ${price} eth\n📉 Floor Change:\n🗓 1 Day: ${floorChange1day}%\n🗓 7 Day: ${floorChange7day}%\n🗓 30 Day: ${floorChange30day}%\n📈 Total Volume: ${totalVolume} eth\n💎 Unique Holder: ${uniqueHolder}\n💎 Listed: ${listed.toFixed(
                 2
               )} %\n\n🔗 Collection Links:\n[Opensea](${collectionOpenseaUrl}) | [Etherscan](${collectionEtherscanUrl})`;
               captionText = captionText.replace(/\./g, "\\.");
