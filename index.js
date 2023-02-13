@@ -478,7 +478,7 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
           let captionText = `\n🌄 _${
             res_sol_collection.data[0].name
           }_\n\n⚡️ *Network: Solana*\n\n💰 *Price*: ${res_sol_collection.data[0].floor_price.toFixed(
-            4
+            2
           )} sol\n📉 *Floor Change*:\n🗓 *1 Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
             2
           )}%\n🗓 *7 Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
@@ -486,12 +486,12 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
           )}%\n🗓 *30 Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
             2
           )}%\n📈 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
-            4
+            2
           )} sol\n💎 *Total Supply*: ${
             res_sol_collection.data[0].total_items
           }\n💎 *Listed*: ${
             res_sol_collection.data[0].me_listed_count
-          } %\n\n🔗 Collection Links:\n[MagicEden](https://magiceden.io/marketplace/${
+          }\n\n🔗 Collection Links:\n[MagicEden](https://magiceden.io/marketplace/${
             res_sol_collection.data[0].magiceden
           })`;
           captionText = captionText.replace(/\./g, "\\.");
