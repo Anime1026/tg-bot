@@ -521,13 +521,4 @@ bot.on("message", async (ctx) => {
   InputCallBack(ctx);
 });
 
-const test = async () => {
-  let data = await axios.get(
-    "https://jpn698dhc9.execute-api.us-east-1.amazonaws.com/prod/v3/collectionDetail?collection=y00ts"
-  );
-  console.log(data.data, "data");
-};
-
-test();
-
 bot.launch();
