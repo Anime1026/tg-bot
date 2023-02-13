@@ -299,7 +299,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           filestack_client
             .upload(image_file)
-            .then((res) => {
+            .then(async (res) => {
               const price =
                 res2.data.collections[0].floorAsk.price.amount.native.toFixed(
                   4
@@ -354,12 +354,10 @@ const searchCollection_collectionName = async (ctx, msg) => {
               const options_owner = {
                 method: "GET",
                 headers: { "X-API-KEY": "abb98582ec0343268a2fd47cfdf46036" },
+                url: "https://api.opensea.io/api/v1/collection/mutant-ape-yacht-club",
               };
 
-              let owner_data = fetch(
-                "https://api.opensea.io/api/v1/collection/mutant-ape-yacht-club",
-                options_owner
-              );
+              let owner_data = await axios.request(options_owner);
 
               console.log(
                 owner_data.data.collection.stats.num_owners,
