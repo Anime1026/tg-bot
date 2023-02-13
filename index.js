@@ -39,7 +39,7 @@ const InputCallBack = (ctx) => {
         key = key + cmdData[index].toLowerCase() + "-";
       }
     }
-    searchCollection_solCollectionName(key);
+    searchCollection_solCollectionName(ctx, key);
   }
 };
 
@@ -418,7 +418,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
     });
 };
 
-const searchCollection_solCollectionName = async (msg) => {
+const searchCollection_solCollectionName = async (ctx, msg) => {
   axios
     .get(`https://cloudflare-worker-nft.solswatch.workers.dev/slug/${msg}`)
     .then(async (res_sol_collection) => {
