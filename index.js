@@ -19,7 +19,7 @@ dotenv.config();
 let Myctx;
 const token = process.env.BOT_TOKEN;
 const bot = new Telegraf(token);
-const filestack_client = filestack.init("AOExJh7QSf38cAWgrlIMwz");
+const filestack_client = filestack.init("AJhmFi6TvTFel1yYFFcY0z");
 
 const InputCallBack = (ctx) => {
   let cmdData = ctx.update.message.text.split(" ");
