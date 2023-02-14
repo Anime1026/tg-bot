@@ -452,7 +452,9 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
       for (let index = 0; index < data.length; index++) {
         const element = data[index];
         const DateNum =
-          String(new Date(element.date)).split(" ")[1] +
+          String(
+            new Date(new Date(element.date).valueOf() - 24 * 60 * 60 * 1000)
+          ).split(" ")[1] +
           "-" +
           new Date(element.date).getDate();
         configuration.data.labels.push(DateNum);
