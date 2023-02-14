@@ -83,7 +83,7 @@ const searchCollection_collectionId = (ctx, key) => {
       configuration.data.labels = [];
 
       for (let index = 0; index < data.data.events.length; index++) {
-        const element = data.data.events[index];
+        const element = data.data.events[data.data.events.length - 1 - index];
 
         const DateNum =
           String(
@@ -270,7 +270,8 @@ const searchCollection_collectionName = async (ctx, msg) => {
           configuration.data.labels = [];
 
           for (let index = 0; index < data.data.events.length; index++) {
-            const element = data.data.events[index];
+            const element =
+              data.data.events[data.data.events.length - 1 - index];
             const DateNum =
               String(
                 new Date(
