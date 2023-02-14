@@ -427,7 +427,7 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
       let url = `https://cloudflare-worker-nft.solswatch.workers.dev/chart-data/30/${msg}`;
 
       let data = await axios.get(url);
-      data = data.data[1];
+      data = data.data[0];
 
       let configuration = {
         type: "line",
@@ -449,8 +449,8 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
       configuration.data.datasets[0].data = [];
       configuration.data.labels = [];
 
-      for (let index = 0; index < 7; index++) {
-        const element = data[data.length - 1 - index];
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index];
         const DateNum =
           String(new Date(element.date)).split(" ")[1] +
           "-" +
