@@ -271,7 +271,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           for (let index = 0; index < data.data.events.length; index++) {
             const element = data.data.events[index];
-            for (let index = 0; index < 7; index++) {
+            for (let k = 0; k < 7; k++) {
               const DateNum =
                 String(
                   new Date(
