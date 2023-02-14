@@ -271,21 +271,22 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           for (let index = 0; index < data.data.events.length; index++) {
             const element = data.data.events[index];
-
-            const DateNum =
-              String(
+            for (let index = 0; index < 7; index++) {
+              const DateNum =
+                String(
+                  new Date(
+                    curDate -
+                      24 * 60 * 60 * 1000 * (data.data.events.length - index)
+                  )
+                ).split(" ")[1] +
+                "-" +
                 new Date(
                   curDate -
                     24 * 60 * 60 * 1000 * (data.data.events.length - index)
-                )
-              ).split(" ")[1] +
-              "-" +
-              new Date(
-                curDate -
-                  24 * 60 * 60 * 1000 * (data.data.events.length - index)
-              ).getDate();
+                ).getDate();
 
-            configuration.data.labels.push(DateNum);
+              configuration.data.labels.push(DateNum);
+            }
             configuration.data.datasets[0].data.push(
               Number(element.floorAsk.price)
             );
