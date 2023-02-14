@@ -250,7 +250,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
           let configuration = {
             type: "line",
             data: {
-              labels: [1, 2, 3, 4, 5, 6, 7],
+              labels: ["1", "2", "3", "4", "5", "6", "7"],
               datasets: [
                 {
                   label: "Floor Price",
