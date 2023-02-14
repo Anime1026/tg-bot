@@ -250,7 +250,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
           let configuration = {
             type: "line",
             data: {
-              labels: [],
+              labels: [1, 2, 3, 4, 5, 6, 7],
               datasets: [
                 {
                   label: "Floor Price",
@@ -271,22 +271,22 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
           for (let index = 0; index < data.data.events.length; index++) {
             const element = data.data.events[index];
-            for (let k = 0; k < 7; k++) {
-              const DateNum =
-                String(
-                  new Date(
-                    curDate -
-                      24 * 60 * 60 * 1000 * (data.data.events.length - index)
-                  )
-                ).split(" ")[1] +
-                "-" +
-                new Date(
-                  curDate -
-                    24 * 60 * 60 * 1000 * (data.data.events.length - index)
-                ).getDate();
+            // for (let k = 0; k < 7; k++) {
+            //   const DateNum =
+            //     String(
+            //       new Date(
+            //         curDate -
+            //           24 * 60 * 60 * 1000 * (data.data.events.length - index)
+            //       )
+            //     ).split(" ")[1] +
+            //     "-" +
+            //     new Date(
+            //       curDate -
+            //         24 * 60 * 60 * 1000 * (data.data.events.length - index)
+            //     ).getDate();
 
-              configuration.data.labels.push(DateNum);
-            }
+            //   configuration.data.labels.push(DateNum);
+            // }
             configuration.data.datasets[0].data.push(
               Number(element.floorAsk.price)
             );
