@@ -58,7 +58,7 @@ const searchCollection_collectionId = (ctx, key) => {
   axios
     .request(options2)
     .then(async (res2) => {
-      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit=31`;
+      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit7`;
       let data = await axios.get(url);
       let configuration = {
         type: "line",
@@ -245,7 +245,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
       axios
         .request(options2)
         .then(async (res2) => {
-          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=31`;
+          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=7`;
 
           let data = await axios.get(url);
 
