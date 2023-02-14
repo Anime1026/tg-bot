@@ -456,7 +456,9 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
             new Date(new Date(element.date).valueOf() - 24 * 60 * 60 * 1000)
           ).split(" ")[1] +
           "-" +
-          new Date(element.date).getDate();
+          new Date(
+            new Date(element.date).valueOf() - 24 * 60 * 60 * 1000
+          ).getDate();
         configuration.data.labels.push(DateNum);
         configuration.data.datasets[0].data.push(
           Number(element.me_floor_price)
