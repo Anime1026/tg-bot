@@ -132,28 +132,38 @@ const searchCollection_collectionId = (ctx, key) => {
           const price =
             res2.data.collections[0].floorAsk.price.amount.native.toFixed(4);
           const floorChange1day =
-            res2.data.collections[0].floorSaleChange["1day"] >= 1
+            configuration.data.datasets[0].data[5] >=
+            configuration.data.datasets[0].data[6]
               ? "+" +
                 (
-                  (res2.data.collections[0].floorSaleChange["1day"] - 1) *
+                  (configuration.data.datasets[0].data[5] /
+                    configuration.data.datasets[0].data[6]) *
+                    100 -
                   100
                 ).toFixed(2)
               : "-" +
                 (
-                  (1 - res2.data.collections[0].floorSaleChange["1day"]) *
+                  (configuration.data.datasets[0].data[5] /
+                    configuration.data.datasets[0].data[6]) *
+                    100 -
                   100
                 ).toFixed(2);
 
           const floorChange7day =
-            res2.data.collections[0].floorSaleChange["7day"] >= 1
+            configuration.data.datasets[0].data[0] >=
+            configuration.data.datasets[0].data[6]
               ? "+" +
                 (
-                  (res2.data.collections[0].floorSaleChange["7day"] - 1) *
+                  (configuration.data.datasets[0].data[0] /
+                    configuration.data.datasets[0].data[6] -
+                    1) *
                   100
                 ).toFixed(2)
               : "-" +
                 (
-                  (1 - res2.data.collections[0].floorSaleChange["7day"]) *
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[0] -
+                    1) *
                   100
                 ).toFixed(2);
 
@@ -335,28 +345,38 @@ const searchCollection_collectionName = async (ctx, msg) => {
                   4
                 );
               const floorChange1day =
-                res2.data.collections[0].floorSaleChange["1day"] >= 1
+                configuration.data.datasets[0].data[5] >=
+                configuration.data.datasets[0].data[6]
                   ? "+" +
                     (
-                      (res2.data.collections[0].floorSaleChange["1day"] - 1) *
+                      (configuration.data.datasets[0].data[5] /
+                        configuration.data.datasets[0].data[6]) *
+                        100 -
                       100
                     ).toFixed(2)
                   : "-" +
                     (
-                      (1 - res2.data.collections[0].floorSaleChange["1day"]) *
+                      (configuration.data.datasets[0].data[5] /
+                        configuration.data.datasets[0].data[6]) *
+                        100 -
                       100
                     ).toFixed(2);
 
               const floorChange7day =
-                res2.data.collections[0].floorSaleChange["7day"] >= 1
+                configuration.data.datasets[0].data[0] >=
+                configuration.data.datasets[0].data[6]
                   ? "+" +
                     (
-                      (res2.data.collections[0].floorSaleChange["7day"] - 1) *
+                      (configuration.data.datasets[0].data[0] /
+                        configuration.data.datasets[0].data[6] -
+                        1) *
                       100
                     ).toFixed(2)
                   : "-" +
                     (
-                      (1 - res2.data.collections[0].floorSaleChange["7day"]) *
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[0] -
+                        1) *
                       100
                     ).toFixed(2);
 
