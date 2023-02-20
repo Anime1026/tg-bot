@@ -58,8 +58,10 @@ const searchCollection_collectionId = (ctx, key) => {
   axios
     .request(options2)
     .then(async (res2) => {
-      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit7`;
+      let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${id}&sortDirection=desc&limit=1000`;
+
       let data = await axios.get(url);
+
       let configuration = {
         type: "line",
         data: {
@@ -77,31 +79,38 @@ const searchCollection_collectionId = (ctx, key) => {
         },
       };
 
-      const curDate = new Date().valueOf();
-
-      configuration.data.datasets[0].data = [];
+      let PriceData = data.data.events;
+      configuration.data.datasets[0].data.push(PriceData[0].floorAsk.price);
       configuration.data.labels = [];
+      let curDate = new Date().getDate();
 
-      for (let index = 0; index < data.data.events.length; index++) {
-        const element = data.data.events[data.data.events.length - 1 - index];
+      PriceData.forEach((element) => {
+        if (configuration.data.datasets[0].data.length < 7) {
+          if (new Date(element.event.createdAt).getDate() < curDate) {
+            let diff = curDate - new Date(element.event.createdAt).getDate();
+            for (let index = 0; index < diff; index++) {
+              configuration.data.datasets[0].data.push(element.floorAsk.price);
+            }
+            curDate = new Date(element.event.createdAt).getDate();
+          }
+        }
+      });
 
+      configuration.data.datasets[0].data.reverse();
+
+      // -------------------------------------
+
+      curDate = new Date().valueOf();
+
+      for (let index = 0; index < 7; index++) {
         const DateNum =
-          String(
-            new Date(
-              curDate -
-                24 * 60 * 60 * 1000 * (data.data.events.length - 1 - index)
-            )
-          ).split(" ")[1] +
+          String(new Date(curDate - 24 * 60 * 60 * 1000 * (6 - index))).split(
+            " "
+          )[1] +
           "-" +
-          new Date(
-            curDate -
-              24 * 60 * 60 * 1000 * (data.data.events.length - 1 - index)
-          ).getDate();
+          new Date(curDate - 24 * 60 * 60 * 1000 * (6 - index)).getDate();
 
         configuration.data.labels.push(DateNum);
-        configuration.data.datasets[0].data.push(
-          Number(element.floorAsk.price)
-        );
       }
 
       const dataUrl = await chartJSNodeCanvas.renderToDataURL(configuration);
@@ -245,7 +254,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
       axios
         .request(options2)
         .then(async (res2) => {
-          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=7`;
+          let url = `https://api.reservoir.tools/events/collections/floor-ask/v1?collection=${response.data.collections[0].collectionId}&sortDirection=desc&limit=1000`;
 
           let data = await axios.get(url);
 
@@ -266,31 +275,41 @@ const searchCollection_collectionName = async (ctx, msg) => {
             },
           };
 
-          const curDate = new Date().valueOf();
-
-          configuration.data.datasets[0].data = [];
+          let PriceData = data.data.events;
+          configuration.data.datasets[0].data.push(PriceData[0].floorAsk.price);
           configuration.data.labels = [];
+          let curDate = new Date().getDate();
 
-          for (let index = 0; index < data.data.events.length; index++) {
-            const element =
-              data.data.events[data.data.events.length - 1 - index];
+          PriceData.forEach((element) => {
+            if (configuration.data.datasets[0].data.length < 7) {
+              if (new Date(element.event.createdAt).getDate() < curDate) {
+                let diff =
+                  curDate - new Date(element.event.createdAt).getDate();
+                for (let index = 0; index < diff; index++) {
+                  configuration.data.datasets[0].data.push(
+                    element.floorAsk.price
+                  );
+                }
+                curDate = new Date(element.event.createdAt).getDate();
+              }
+            }
+          });
+
+          configuration.data.datasets[0].data.reverse();
+
+          // -------------------------------------
+
+          curDate = new Date().valueOf();
+
+          for (let index = 0; index < 7; index++) {
             const DateNum =
               String(
-                new Date(
-                  curDate -
-                    24 * 60 * 60 * 1000 * (data.data.events.length - 1 - index)
-                )
+                new Date(curDate - 24 * 60 * 60 * 1000 * (6 - index))
               ).split(" ")[1] +
               "-" +
-              new Date(
-                curDate -
-                  24 * 60 * 60 * 1000 * (data.data.events.length - 1 - index)
-              ).getDate();
+              new Date(curDate - 24 * 60 * 60 * 1000 * (6 - index)).getDate();
 
             configuration.data.labels.push(DateNum);
-            configuration.data.datasets[0].data.push(
-              Number(element.floorAsk.price)
-            );
           }
 
           const dataUrl = await chartJSNodeCanvas.renderToDataURL(
