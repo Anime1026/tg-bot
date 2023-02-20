@@ -136,17 +136,17 @@ const searchCollection_collectionId = (ctx, key) => {
             configuration.data.datasets[0].data[5]
               ? "+" +
                 (
-                  (configuration.data.datasets[0].data[5] /
-                    configuration.data.datasets[0].data[6]) *
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[5]) *
                     100 -
                   100
                 ).toFixed(2)
               : "-" +
                 (
-                  (configuration.data.datasets[0].data[5] /
-                    configuration.data.datasets[0].data[6]) *
-                    100 -
-                  100
+                  100 -
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[5]) *
+                    100
                 ).toFixed(2);
 
           const floorChange7day =
@@ -154,17 +154,17 @@ const searchCollection_collectionId = (ctx, key) => {
             configuration.data.datasets[0].data[0]
               ? "+" +
                 (
-                  (configuration.data.datasets[0].data[0] /
-                    configuration.data.datasets[0].data[6] -
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[0] -
                     1) *
                   100
                 ).toFixed(2)
               : "-" +
                 (
+                  100 -
                   (configuration.data.datasets[0].data[6] /
-                    configuration.data.datasets[0].data[0] -
-                    1) *
-                  100
+                    configuration.data.datasets[0].data[0]) *
+                    100
                 ).toFixed(2);
 
           const floorChange30day =
@@ -349,35 +349,35 @@ const searchCollection_collectionName = async (ctx, msg) => {
                 configuration.data.datasets[0].data[5]
                   ? "+" +
                     (
-                      (configuration.data.datasets[0].data[5] /
-                        configuration.data.datasets[0].data[6]) *
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[5]) *
                         100 -
                       100
                     ).toFixed(2)
                   : "-" +
                     (
-                      (configuration.data.datasets[0].data[5] /
-                        configuration.data.datasets[0].data[6]) *
-                        100 -
-                      100
+                      100 -
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[5]) *
+                        100
                     ).toFixed(2);
 
               const floorChange7day =
                 configuration.data.datasets[0].data[6] >=
-                configuration.data.datasets[0].data[5]
+                configuration.data.datasets[0].data[0]
                   ? "+" +
-                    (
-                      (configuration.data.datasets[0].data[0] /
-                        configuration.data.datasets[0].data[6] -
-                        1) *
-                      100
-                    ).toFixed(2)
-                  : "-" +
                     (
                       (configuration.data.datasets[0].data[6] /
                         configuration.data.datasets[0].data[0] -
                         1) *
                       100
+                    ).toFixed(2)
+                  : "-" +
+                    (
+                      100 -
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[0]) *
+                        100
                     ).toFixed(2);
 
               const floorChange30day =
