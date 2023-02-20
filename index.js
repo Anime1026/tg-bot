@@ -132,8 +132,8 @@ const searchCollection_collectionId = (ctx, key) => {
           const price =
             res2.data.collections[0].floorAsk.price.amount.native.toFixed(4);
           const floorChange1day =
-            configuration.data.datasets[0].data[5] >=
-            configuration.data.datasets[0].data[6]
+            configuration.data.datasets[0].data[6] >=
+            configuration.data.datasets[0].data[5]
               ? "+" +
                 (
                   (configuration.data.datasets[0].data[5] /
@@ -150,8 +150,8 @@ const searchCollection_collectionId = (ctx, key) => {
                 ).toFixed(2);
 
           const floorChange7day =
-            configuration.data.datasets[0].data[0] >=
-            configuration.data.datasets[0].data[6]
+            configuration.data.datasets[0].data[6] >=
+            configuration.data.datasets[0].data[0]
               ? "+" +
                 (
                   (configuration.data.datasets[0].data[0] /
@@ -345,8 +345,8 @@ const searchCollection_collectionName = async (ctx, msg) => {
                   4
                 );
               const floorChange1day =
-                configuration.data.datasets[0].data[5] >=
-                configuration.data.datasets[0].data[6]
+                configuration.data.datasets[0].data[6] >=
+                configuration.data.datasets[0].data[5]
                   ? "+" +
                     (
                       (configuration.data.datasets[0].data[5] /
@@ -363,8 +363,8 @@ const searchCollection_collectionName = async (ctx, msg) => {
                     ).toFixed(2);
 
               const floorChange7day =
-                configuration.data.datasets[0].data[0] >=
-                configuration.data.datasets[0].data[6]
+                configuration.data.datasets[0].data[6] >=
+                configuration.data.datasets[0].data[5]
                   ? "+" +
                     (
                       (configuration.data.datasets[0].data[0] /
