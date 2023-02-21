@@ -43,9 +43,15 @@ const InputCallBack = (ctx) => {
   }
 };
 
-const searchCollection_collectionId = (ctx, key) => {
+const searchCollection_collectionId = async (ctx, key) => {
   try {
     const id = key;
+
+    let data = await axios.get(
+      `https://www.reservoir.market/api/reservoir/stats/v2?collection=${id}&normalizeRoyalties=true`
+    );
+
+    let cur_floorPrice = data.data.stats.market.floorAsk.price.amount.native;
 
     const options2 = {
       method: "GET",
@@ -81,7 +87,7 @@ const searchCollection_collectionId = (ctx, key) => {
         };
 
         let PriceData = data.data.events;
-        configuration.data.datasets[0].data.push(PriceData[0].floorAsk.price);
+        configuration.data.datasets[0].data.push(cur_floorPrice);
         configuration.data.labels = [];
         let curDate = new Date().getDate();
 
@@ -90,9 +96,11 @@ const searchCollection_collectionId = (ctx, key) => {
             if (new Date(element.event.createdAt).getDate() < curDate) {
               let diff = curDate - new Date(element.event.createdAt).getDate();
               for (let index = 0; index < diff; index++) {
-                configuration.data.datasets[0].data.push(
-                  element.floorAsk.price
-                );
+                if (configuration.data.datasets[0].data.length < 7) {
+                  configuration.data.datasets[0].data.push(
+                    element.floorAsk.price
+                  );
+                }
               }
               curDate = new Date(element.event.createdAt).getDate();
             }
@@ -132,56 +140,55 @@ const searchCollection_collectionId = (ctx, key) => {
         filestack_client
           .upload(image_file)
           .then(async (res) => {
-            const price =
-              res2.data.collections[0].floorAsk.price.amount.native.toFixed(4);
+            const price = cur_floorPrice;
             const floorChange1day =
               configuration.data.datasets[0].data[6] >=
-              configuration.data.datasets[0].data[5]
+                configuration.data.datasets[0].data[5]
                 ? "+" +
-                  (
-                    (configuration.data.datasets[0].data[6] /
-                      configuration.data.datasets[0].data[5]) *
-                      100 -
-                    100
-                  ).toFixed(2)
+                (
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[5]) *
+                  100 -
+                  100
+                ).toFixed(2)
                 : "-" +
-                  (
-                    100 -
-                    (configuration.data.datasets[0].data[6] /
-                      configuration.data.datasets[0].data[5]) *
-                      100
-                  ).toFixed(2);
+                (
+                  100 -
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[5]) *
+                  100
+                ).toFixed(2);
 
             const floorChange7day =
               configuration.data.datasets[0].data[6] >=
-              configuration.data.datasets[0].data[0]
+                configuration.data.datasets[0].data[0]
                 ? "+" +
-                  (
-                    (configuration.data.datasets[0].data[6] /
-                      configuration.data.datasets[0].data[0] -
-                      1) *
-                    100
-                  ).toFixed(2)
+                (
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[0] -
+                    1) *
+                  100
+                ).toFixed(2)
                 : "-" +
-                  (
-                    100 -
-                    (configuration.data.datasets[0].data[6] /
-                      configuration.data.datasets[0].data[0]) *
-                      100
-                  ).toFixed(2);
+                (
+                  100 -
+                  (configuration.data.datasets[0].data[6] /
+                    configuration.data.datasets[0].data[0]) *
+                  100
+                ).toFixed(2);
 
             const floorChange30day =
               res2.data.collections[0].floorSaleChange["30day"] >= 1
                 ? "+" +
-                  (
-                    (res2.data.collections[0].floorSaleChange["30day"] - 1) *
-                    100
-                  ).toFixed(2)
+                (
+                  (res2.data.collections[0].floorSaleChange["30day"] - 1) *
+                  100
+                ).toFixed(2)
                 : "-" +
-                  (
-                    (1 - res2.data.collections[0].floorSaleChange["30day"]) *
-                    100
-                  ).toFixed(2);
+                (
+                  (1 - res2.data.collections[0].floorSaleChange["30day"]) *
+                  100
+                ).toFixed(2);
 
             const totalVolume =
               res2.data.collections[0].volume.allTime.toFixed(4);
@@ -250,6 +257,7 @@ const searchCollection_collectionId = (ctx, key) => {
 const searchCollection_collectionName = async (ctx, msg) => {
   try {
     const collectionName = msg;
+
     const options = {
       method: "GET",
       url: `https://api.reservoir.tools/search/collections/v1?name=${collectionName}&limit=1`,
@@ -261,7 +269,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
 
     axios
       .request(options)
-      .then((response) => {
+      .then(async (response) => {
         const options2 = {
           method: "GET",
           url: `https://api.reservoir.tools/collections/v5?id=${response.data.collections[0].collectionId}`,
@@ -270,6 +278,13 @@ const searchCollection_collectionName = async (ctx, msg) => {
             "x-api-key": "abb98582ec0343268a2fd47cfdf46036",
           },
         };
+
+        let data = await axios.get(
+          `https://www.reservoir.market/api/reservoir/stats/v2?collection=${response.data.collections[0].collectionId}&normalizeRoyalties=true`
+        );
+
+        let cur_floorPrice =
+          data.data.stats.market.floorAsk.price.amount.native;
 
         axios
           .request(options2)
@@ -296,9 +311,7 @@ const searchCollection_collectionName = async (ctx, msg) => {
             };
 
             let PriceData = data.data.events;
-            configuration.data.datasets[0].data.push(
-              PriceData[0].floorAsk.price
-            );
+            configuration.data.datasets[0].data.push(cur_floorPrice);
             configuration.data.labels = [];
             let curDate = new Date().getDate();
 
@@ -308,9 +321,11 @@ const searchCollection_collectionName = async (ctx, msg) => {
                   let diff =
                     curDate - new Date(element.event.createdAt).getDate();
                   for (let index = 0; index < diff; index++) {
-                    configuration.data.datasets[0].data.push(
-                      element.floorAsk.price
-                    );
+                    if (configuration.data.datasets[0].data.length < 7) {
+                      configuration.data.datasets[0].data.push(
+                        element.floorAsk.price
+                      );
+                    }
                   }
                   curDate = new Date(element.event.createdAt).getDate();
                 }
@@ -355,60 +370,57 @@ const searchCollection_collectionName = async (ctx, msg) => {
             filestack_client
               .upload(image_file)
               .then(async (res) => {
-                const price =
-                  res2.data.collections[0].floorAsk.price.amount.native.toFixed(
-                    4
-                  );
+                const price = cur_floorPrice;
                 const floorChange1day =
                   configuration.data.datasets[0].data[6] >=
-                  configuration.data.datasets[0].data[5]
+                    configuration.data.datasets[0].data[5]
                     ? "+" +
-                      (
-                        (configuration.data.datasets[0].data[6] /
-                          configuration.data.datasets[0].data[5]) *
-                          100 -
-                        100
-                      ).toFixed(2)
+                    (
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[5]) *
+                      100 -
+                      100
+                    ).toFixed(2)
                     : "-" +
-                      (
-                        100 -
-                        (configuration.data.datasets[0].data[6] /
-                          configuration.data.datasets[0].data[5]) *
-                          100
-                      ).toFixed(2);
+                    (
+                      100 -
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[5]) *
+                      100
+                    ).toFixed(2);
 
                 const floorChange7day =
                   configuration.data.datasets[0].data[6] >=
-                  configuration.data.datasets[0].data[0]
+                    configuration.data.datasets[0].data[0]
                     ? "+" +
-                      (
-                        (configuration.data.datasets[0].data[6] /
-                          configuration.data.datasets[0].data[0] -
-                          1) *
-                        100
-                      ).toFixed(2)
+                    (
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[0] -
+                        1) *
+                      100
+                    ).toFixed(2)
                     : "-" +
-                      (
-                        100 -
-                        (configuration.data.datasets[0].data[6] /
-                          configuration.data.datasets[0].data[0]) *
-                          100
-                      ).toFixed(2);
+                    (
+                      100 -
+                      (configuration.data.datasets[0].data[6] /
+                        configuration.data.datasets[0].data[0]) *
+                      100
+                    ).toFixed(2);
 
                 const floorChange30day =
                   res2.data.collections[0].floorSaleChange["30day"] >= 1
                     ? "+" +
-                      (
-                        (res2.data.collections[0].floorSaleChange["30day"] -
-                          1) *
-                        100
-                      ).toFixed(2)
+                    (
+                      (res2.data.collections[0].floorSaleChange["30day"] -
+                        1) *
+                      100
+                    ).toFixed(2)
                     : "-" +
-                      (
-                        (1 -
-                          res2.data.collections[0].floorSaleChange["30day"]) *
-                        100
-                      ).toFixed(2);
+                    (
+                      (1 -
+                        res2.data.collections[0].floorSaleChange["30day"]) *
+                      100
+                    ).toFixed(2);
 
                 const totalVolume =
                   res2.data.collections[0].volume.allTime.toFixed(4);
@@ -542,25 +554,21 @@ const searchCollection_solCollectionName = async (ctx, msg) => {
         filestack_client
           .upload(image_file)
           .then(async (res) => {
-            let captionText = `\n🌄 _${
-              res_sol_collection.data[0].name
-            }_\n\n⚡️ *Network: Solana*\n\n💰 *Price*: ${res_sol_collection.data[0].floor_price.toFixed(
-              2
-            )} sol\n📉 *Floor Change*:\n🗓 *1 Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
-              2
-            )}%\n🗓 *7 Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
-              2
-            )}%\n🗓 *30 Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
-              2
-            )}%\n📈 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
-              2
-            )} sol\n💎 *Total Supply*: ${
-              res_sol_collection.data[0].total_items
-            }\n💎 *Listed*: ${
-              res_sol_collection.data[0].me_listed_count
-            }\n\nCollection Links:\n[MagicEden](https://magiceden.io/marketplace/${
-              res_sol_collection.data[0].magiceden
-            })`;
+            let captionText = `\n🌄 _${res_sol_collection.data[0].name
+              }_\n\n⚡️ *Network: Solana*\n\n💰 *Price*: ${res_sol_collection.data[0].floor_price.toFixed(
+                2
+              )} sol\n📉 *Floor Change*:\n🗓 *1 Day*: ${res_sol_collection.data[0].daily_floor.toFixed(
+                2
+              )}%\n🗓 *7 Day*: ${res_sol_collection.data[0].weekly_floor.toFixed(
+                2
+              )}%\n🗓 *30 Day*: ${res_sol_collection.data[0].monthly_floor.toFixed(
+                2
+              )}%\n📈 *Total Volume*: ${res_sol_collection.data[0].me_total_volume.toFixed(
+                2
+              )} sol\n💎 *Total Supply*: ${res_sol_collection.data[0].total_items
+              }\n💎 *Listed*: ${res_sol_collection.data[0].me_listed_count
+              }\n\nCollection Links:\n[MagicEden](https://magiceden.io/marketplace/${res_sol_collection.data[0].magiceden
+              })`;
             captionText = captionText.replace(/\./g, "\\.");
             captionText = captionText.replace(/\+/g, "\\+");
             captionText = captionText.replace(/\-/g, "\\-");
